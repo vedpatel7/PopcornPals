@@ -36,22 +36,6 @@ const userSchema = new mongoose.Schema({
 const User= mongoose.model("User",userSchema)
 
 
-// app.post("/login",(req,res)=>{
-//     const{email, password}=req.body
-//     User.findOne({email:email},(err,user)=>{
-//         if(user){
-//             if(password == user.password){
-//                 res.send({message:"login successfully", user:user})
-//             }
-//             else{
-//                 res.send({message:"incorrect password"})
-//             }
-//         }
-//         else{
-//             res.send({message:"user has not registered"})
-//         }
-//     })
-// })
 
 app.post("/login", (req, res) => {
     const { email, password } = req.body;
