@@ -1,44 +1,33 @@
-import React, { useRef, useEffect, useState } from "react"
-import "./homepage.css"
+import React, { useRef, useEffect, useState } from "react";
+import "./homepage.css";
 import axios from 'axios';
+import MovieCard from "./MovieCard";
 
-const API="AIzaSyCqfE6uk9T8YT0pJTc36bRKK1fdDOLUYoo";
-const search="movie trailer"
-var fetchurl=`https://www.googleapis.com/youtube/v3/search?key=${API}&q=${search}&maxResult=20`
+const API_KEY='84edaeedd68b9e73abbe95b5bb70617a';
+const Base_URL='https://api.themoviedb.org/3';
+var Popular=`${Base_URL}/movie/popular?api_key=${API_KEY}`;
+
+
 const Homepage = ({ setLoginUser }) => {
-  const[allvideos,setAllvideos]=useState([])
+  const[allmovies, setAllmovies]=useState([])
   useEffect(()=>{
-      axios.get(fetchurl)
-      .then(response => {
-        const result = response.data.items.map(item => ({
-          ...item,
-          Videolink: "https://www.youtube.com/embed/" + item.id.videoId
-        }));
-        setAllvideos(result);
+    axios.get(Popular)
+    .then(response =>{
+      setAllmovies(response.data.results);
       })
-      .catch(error => {
-        console.error("Error fetching videos:", error);
-      });
-      
+    .catch(err=>{console.log(err)})
   },[])
 
-  console.log(allvideos);
   return (
-    <div className="homepage">
-      <h1>Hello Homepage</h1>
+    <div>
+      <h1>Trending Movies</h1>
       <div>
-        <h1>Video List</h1>
-        <div>
-          {allvideos.map((item)=>{
-            return(
-              <div>
-              <iframe width="560" height="315" src={item.Videolink} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-              </div>
-            );
+        {allmovies.map((movie,index)=>{
+            return( 
+              <MovieCard key={index}{...movie}/>
+            )
           })}
-        </div>
       </div>
-
       <div className="button" onClick={() => setLoginUser({})} >Logout</div>
     </div>
   )
