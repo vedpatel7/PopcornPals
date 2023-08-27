@@ -1,36 +1,82 @@
-import React, { useRef, useEffect, useState } from "react";
-import "./homepage.css";
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import MovieCard from "./MovieCard";
+import "./homepage.css";
 
-const API_KEY='84edaeedd68b9e73abbe95b5bb70617a';
-const Base_URL='https://api.themoviedb.org/3';
-var Popular=`${Base_URL}/movie/popular?api_key=${API_KEY}`;
-
+const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
+const Base_URL = 'https://api.themoviedb.org/3';
+const Popular = `${Base_URL}/movie/popular?api_key=${API_KEY}`;
+const Upcoming=`${Base_URL}/movie/upcoming?api_key=${API_KEY}`;
+const Now_Playing=`${Base_URL}/movie/now_playing?api_key=${API_KEY}`;
 
 const Homepage = ({ setLoginUser }) => {
-  const[allmovies, setAllmovies]=useState([])
-  useEffect(()=>{
+  const [popularmovies, setPopularMovies] = useState([]);
+  const [upcomingmovies, setUpcomingMovies]=useState([]);
+  const [playingmovies, setPlayingMovies]=useState([]);
+
+  useEffect(() => {
     axios.get(Popular)
-    .then(response =>{
-      setAllmovies(response.data.results);
+      .then(response => {
+        setPopularMovies(response.data.results);
       })
-    .catch(err=>{console.log(err)})
-  },[])
+      .catch(err => {
+        console.log(err);
+      });
+      axios.get(Upcoming)
+      .then(response => {
+        setUpcomingMovies(response.data.results);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+      axios.get(Now_Playing)
+      .then(response => {
+        setPlayingMovies(response.data.results);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    
+  }, []);
 
   return (
     <div>
-      <h1>Trending Movies</h1>
-      <div>
-        {allmovies.map((movie,index)=>{
-            return( 
-              <MovieCard key={index}{...movie}/>
-            )
-          })}
+      <h1 className="trending-title">Trending Movies</h1>
+      <div className="carousel-container">
+      <div className="carousel">
+        {popularmovies.map((movie, index) => (
+          <div key={index} className="carousel-item">
+            <MovieCard {...movie} />
+          </div>
+        ))}
       </div>
-      <div className="button" onClick={() => setLoginUser({})} >Logout</div>
+      </div>
+        
+      <h1 className="trending-title">Upcoming Movies</h1>
+      <div className="carousel-container">
+      <div className="carousel">
+        {upcomingmovies.map((movie, index) => (
+          <div key={index} className="carousel-item">
+            <MovieCard {...movie} />
+          </div>
+        ))}
+      </div>
+      </div>
+
+      <h1 className="trending-title">Now Playing Movies</h1>
+      <div className="carousel-container">
+      <div className="carousel">
+        {playingmovies.map((movie, index) => (
+          <div key={index} className="carousel-item">
+            <MovieCard {...movie} />
+          </div>
+        ))}
+      </div>
+      </div>
+      
+      <div className="button" onClick={() => setLoginUser({})}>Logout</div>
     </div>
-  )
+  );
 }
 
 export default Homepage;

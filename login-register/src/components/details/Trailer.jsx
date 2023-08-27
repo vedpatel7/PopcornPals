@@ -4,10 +4,10 @@ const API_KEY='84edaeedd68b9e73abbe95b5bb70617a';
 const getVideos = (id)=>{
     return `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
 }
-const Trailer=({id})=>{
+const Trailer=(props)=>{
     const[trailer, setTrailer]=useState([])
     useEffect(()=>{
-        axios.get(getVideos(id))
+        axios.get(getVideos(props.id))
         .then(response=>{
             const trailers=response.data.results.filter(item => {
                 return item.type === "Trailer" && item.site==="YouTube"});
