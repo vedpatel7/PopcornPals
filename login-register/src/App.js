@@ -7,7 +7,7 @@ import Register from "./components/register/register";
 
 function App() {
   const [user, setLoginUser] = useState(null);
-
+  
   return (
     <div className="App">
       <Router>
@@ -21,6 +21,7 @@ function App() {
                 <Login setLoginUser={setLoginUser} />
               )
             }
+
           />
           <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
           <Route path="/register" element={<Register />} />
