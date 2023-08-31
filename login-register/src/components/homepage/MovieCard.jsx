@@ -8,7 +8,7 @@ const getPoster = (backdrop_path) => {
   return `${Base_Image}${backdrop_path}`;
 }
 
-const MovieCard = ({ backdrop_path, title, release_date, id }) => {
+const MovieCard = ({ backdrop_path, title, vote_average, id }) => {
     const navigate = useNavigate();
     const handleClick=()=>{
         navigate("/trailer", {state: {id : id}});
@@ -18,7 +18,7 @@ const MovieCard = ({ backdrop_path, title, release_date, id }) => {
       <img src={getPoster(backdrop_path)} alt={title} />
       <div className="movie-details"> {/* Apply the CSS class here */}
         <h1 className="movie-title">{title}</h1>
-        <p className="movie-release-date">{release_date}</p>
+        <p className="movie-release-date">{vote_average}</p>
       </div>
       {/* <Trailer id={id}/> */}
     </div>
