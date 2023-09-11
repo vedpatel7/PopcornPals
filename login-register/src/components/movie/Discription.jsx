@@ -24,7 +24,7 @@ const Discription=(props)=>{
         <div>
         <h1>{title}</h1>
         <p>{discription}</p>
-        <h3>{date}</h3>
+        <h4>Release Date: {date}</h4>
         </div>
     )
 }
