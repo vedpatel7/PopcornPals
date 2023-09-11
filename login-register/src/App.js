@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from "react-route
 import Homepage from "./components/homepage/homepage";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
-import Trailer from './components/details/Trailer';
+import Details from './components/movie/Movie';
 
 function App() {
   const [user, setLoginUser] = useState(null);
@@ -26,7 +26,7 @@ function App() {
           />
           <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
           <Route path="/register" element={<Register />} />
-          <Route path = "/trailer" element = {<Myfun/>} />
+          <Route path = "/details" element = {<Myfun/>} />
         </Routes>
       </Router>
     </div>
@@ -36,9 +36,9 @@ function Myfun(){
   const location = useLocation();
   const id = location.state ? location.state.id : null;
   return (
-    <>
-      <Trailer id = {id}/>
-    </>
+    <div>
+      <Details id = {id}/>
+    </div>
   )
 }
 

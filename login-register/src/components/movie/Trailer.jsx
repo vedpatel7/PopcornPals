@@ -12,7 +12,6 @@ const Trailer=(props)=>{
             const trailers=response.data.results.filter(item => {
                 return item.type === "Trailer" && item.site==="YouTube"});
             setTrailer(trailers);
-            console.log(trailers);
         })
         .catch(err=>{console.log(err)})
     },[])
@@ -20,7 +19,6 @@ const Trailer=(props)=>{
         {trailer.map((item, index) => (
         <div key={index}>
           <h2>{item.name}</h2>
-          {/* <p>{item.key}</p> */}
           <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + item.key} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       ))}

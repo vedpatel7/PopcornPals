@@ -1,5 +1,5 @@
 import React from "react";
-import "./MovieCard.css"; // Import the CSS file
+import "./MovieCard.css"; 
 import { Navigate, useNavigate } from "react-router-dom";
 
 const Base_Image = 'https://www.themoviedb.org/t/p/w440_and_h660_face';
@@ -8,19 +8,18 @@ const getPoster = (backdrop_path) => {
   return `${Base_Image}${backdrop_path}`;
 }
 
-const MovieCard = ({ backdrop_path, title, vote_average, id }) => {
+const MovieCard = (props) => {
     const navigate = useNavigate();
     const handleClick=()=>{
-        navigate("/trailer", {state: {id : id}});
+        navigate("/details", {state: {id : props.id}});
     }
   return (
-    <div className="movie-card" onClick={handleClick}> {/* Apply the CSS class here */}
-      <img src={getPoster(backdrop_path)} alt={title} />
-      <div className="movie-details"> {/* Apply the CSS class here */}
-        <h1 className="movie-title">{title}</h1>
-        <p className="movie-release-date">{vote_average}</p>
+    <div className="movie-card" onClick={handleClick}>
+      <img src={getPoster(props.backdrop_path)} alt={props.title} />
+      <div className="movie-details">
+        <h1 className="movie-title">{props.title}</h1>
+        <p className="movie-release-date">{props.vote_average}</p>
       </div>
-      {/* <Trailer id={id}/> */}
     </div>
   );
 }
