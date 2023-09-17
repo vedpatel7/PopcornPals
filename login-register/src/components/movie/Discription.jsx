@@ -6,10 +6,11 @@ const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const getDiscription = (id) => {
     return `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
 }
+
 const Discription = (props) => {
-    const [discription, setDiscription] = useState('')
+    const [discription, setDiscription] = useState('');
     const [title, setTitle] = useState('');
-    const [date, setDate] = useState('')
+    const [date, setDate] = useState('');
     useEffect(() => {
         axios.get(getDiscription(props.id))
             .then(response => {
@@ -33,9 +34,7 @@ const Discription = (props) => {
         axios.post("http://localhost:9002/watchlist", movie)
             .then(res => {
                 alert(res.data.message)
-                // navigate("/watchlater", { state: { id: props.id } });
             })
-
     }
 
     return (

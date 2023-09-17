@@ -27,8 +27,8 @@ const userSchema = new mongoose.Schema({
 
 const movieSchema = new mongoose.Schema({
   emailId: String,
-  movieId: String
-})
+  movieIds: [String]
+});
 
 const User = mongoose.model("User", userSchema)
 const Movie = mongoose.model("Movie", movieSchema)
@@ -87,17 +87,24 @@ app.post("/register", (req, res) => {
 
 app.post("/watchlist", (req, res) => {
   const { emailId, movieId } = req.body;
-  Movie.findOne({ $and: [{ emailId: emailId }, { movieId: movieId }] })
+  Movie.findOne({ emailId: emailId })
     .then((movie) => {
-      if (movie)
-        res.send({ message: "movie already added" })
-
-      else {
-        const movie = new Movie({
-          emailId: emailId,
-          movieId: movieId
-        })
+      if (movie) {
+        movie.movieIds.push(movieId);
         movie.save()
+          .then(() => {
+            res.send({ message: "Successfully added" });
+          })
+          .catch((err) => {
+            console.error("Error adding movie:", err);
+            res.status(500).send("Internal Server Error");
+          });
+      } else {
+        const newMovie = new Movie({
+          emailId: emailId,
+          movieIds: [movieId]
+        });
+        newMovie.save()
           .then(() => {
             res.send({ message: "Successfully added" });
           })
@@ -108,10 +115,9 @@ app.post("/watchlist", (req, res) => {
       }
     })
     .catch(function (err) {
-      console.log(err)
+      console.log(err);
     });
-})
-
+});
 
 app.listen(9002, () => {
   console.log("Started on port 9002")
