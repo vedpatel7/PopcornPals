@@ -33,7 +33,7 @@ const Discription = (props) => {
         axios.post("http://localhost:9002/watchlist", movie)
             .then(res => {
                 alert(res.data.message)
-                navigate("/watchlater", { state: { id: props.id } });
+                // navigate("/watchlater", { state: { id: props.id } });
             })
 
     }

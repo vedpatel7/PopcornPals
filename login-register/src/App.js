@@ -23,12 +23,11 @@ function App() {
                 <Login setLoginUser={setLoginUser} />
               )
             }
-
           />
           <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path = "/details" element = {<GetDetails/>} />
-          <Route path = "/watchlater" element={<WatchLater/>}/>
+          <Route path = "/watchlist" element={<WatchList/>}/>
         </Routes>
       </Router>
     </div>
@@ -44,15 +43,6 @@ function GetDetails(){
   )
 }
 
-function WatchLater(){
-  const location = useLocation();
-  const id= location.state ? location.state.id : null;
-  return (
-    <div>
-      <WatchList id = {id}/>
-    </div>
-  )
-}
 
 export default App;
 

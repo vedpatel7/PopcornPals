@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import MovieCard from "./MovieCard";
 import "./homepage.css";
+import {useNavigate} from "react-router-dom";
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
@@ -11,11 +12,12 @@ const Now_Playing=`${Base_URL}/movie/now_playing?api_key=${API_KEY}`;
 
 const Homepage = ({ setLoginUser }) => {
 
+  const navigate = useNavigate();
+
   const handleLogout=()=>{
     localStorage.removeItem('EmailId');
     setLoginUser({});
   }
-  
   const [popularmovies, setPopularMovies] = useState([]);
   const [upcomingmovies, setUpcomingMovies]=useState([]);
   const [playingmovies, setPlayingMovies]=useState([]);
@@ -47,6 +49,10 @@ const Homepage = ({ setLoginUser }) => {
 
   return (
     <div>
+      <div className="button" onClick={handleLogout}>Logout</div>
+
+      <div className="button" onClick={() => navigate("/watchlist")}>Register</div>
+
       <h1 className="trending-title">Trending Movies</h1>
       <div className="carousel-container">
       <div className="carousel">
@@ -68,7 +74,6 @@ const Homepage = ({ setLoginUser }) => {
         ))}
       </div>
       </div>
-
       <h1 className="trending-title">Now Playing Movies</h1>
       <div className="carousel-container">
       <div className="carousel">
@@ -79,8 +84,6 @@ const Homepage = ({ setLoginUser }) => {
         ))}
       </div>
       </div>
-      
-      <div className="button" onClick={handleLogout}>Logout</div>
     </div>
   );
 }

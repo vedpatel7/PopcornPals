@@ -47,7 +47,7 @@
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     text-align: center;
-    max-width: 100%; /* Make sure the info box doesn't exceed its parent's width */
+    max-width: 100%;
     margin: 0 auto; 
   }
   
