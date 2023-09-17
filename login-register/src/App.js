@@ -5,6 +5,7 @@ import Homepage from "./components/homepage/homepage";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import Details from './components/movie/Movie';
+import WatchList from './components/watchlist/WatchList';
 
 function App() {
   const [user, setLoginUser] = useState(null);
@@ -26,18 +27,29 @@ function App() {
           />
           <Route path="/login" element={<Login setLoginUser={setLoginUser} />} />
           <Route path="/register" element={<Register />} />
-          <Route path = "/details" element = {<Myfun/>} />
+          <Route path = "/details" element = {<GetDetails/>} />
+          <Route path = "/watchlater" element={<WatchLater/>}/>
         </Routes>
       </Router>
     </div>
   );
 }
-function Myfun(){
+function GetDetails(){
   const location = useLocation();
   const id = location.state ? location.state.id : null;
   return (
     <div>
       <Details id = {id}/>
+    </div>
+  )
+}
+
+function WatchLater(){
+  const location = useLocation();
+  const id= location.state ? location.state.id : null;
+  return (
+    <div>
+      <WatchList id = {id}/>
     </div>
   )
 }
