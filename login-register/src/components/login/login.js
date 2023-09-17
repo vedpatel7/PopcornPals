@@ -20,7 +20,8 @@ const Login = ({setLoginUser}) => {
           }));
     }
 
-    const login = () => {   
+    const login = () => { 
+        localStorage.setItem('EmailId', user.email);
         axios.post("http://localhost:9002/login", user)
         .then((res) => {
             setLoginUser(res.data.user);

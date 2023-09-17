@@ -10,6 +10,12 @@ const Upcoming=`${Base_URL}/movie/upcoming?api_key=${API_KEY}`;
 const Now_Playing=`${Base_URL}/movie/now_playing?api_key=${API_KEY}`;
 
 const Homepage = ({ setLoginUser }) => {
+
+  const handleLogout=()=>{
+    localStorage.removeItem('EmailId');
+    setLoginUser({});
+  }
+  
   const [popularmovies, setPopularMovies] = useState([]);
   const [upcomingmovies, setUpcomingMovies]=useState([]);
   const [playingmovies, setPlayingMovies]=useState([]);
@@ -74,7 +80,7 @@ const Homepage = ({ setLoginUser }) => {
       </div>
       </div>
       
-      <div className="button" onClick={() => setLoginUser({})}>Logout</div>
+      <div className="button" onClick={handleLogout}>Logout</div>
     </div>
   );
 }
