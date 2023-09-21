@@ -9,6 +9,7 @@ import WatchList from './components/watchlist/WatchList';
 
 function App() {
   const [user, setLoginUser] = useState(null);
+  const emailId = JSON.stringify(localStorage.getItem('EmailId'))
   
   return (
     <div className="App">
@@ -28,6 +29,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path = "/details" element = {<GetDetails/>} />
           <Route path = "/watchlist" element={<WatchList/>}/>
+          <Route path = "/watchlist/:emailId" element={<WatchList/>}/>
+
         </Routes>
       </Router>
     </div>

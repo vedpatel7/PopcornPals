@@ -87,6 +87,7 @@ app.post("/register", (req, res) => {
 
 app.post("/watchlist", (req, res) => {
   const { emailId, movieId } = req.body;
+  console.log(emailId);
   Movie.findOne({ emailId: emailId })
     .then((movie) => {
       if (movie) {
@@ -99,6 +100,7 @@ app.post("/watchlist", (req, res) => {
             console.error("Error adding movie:", err);
             res.status(500).send("Internal Server Error");
           });
+          
       } else {
         const newMovie = new Movie({
           emailId: emailId,
@@ -118,6 +120,19 @@ app.post("/watchlist", (req, res) => {
       console.log(err);
     });
 });
+
+app.get('/watchlist/:emailId', (req, res) => {
+  const { emailId } = req.params;
+    Movie.findOne({ emailId:`"${emailId}"`})
+    .then((movie) => {
+      res.json(movie.movieIds);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+
+});
+
 
 app.listen(9002, () => {
   console.log("Started on port 9002")

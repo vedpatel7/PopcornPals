@@ -18,6 +18,11 @@ const Homepage = ({ setLoginUser }) => {
     localStorage.removeItem('EmailId');
     setLoginUser({});
   }
+
+  const handleWatchList = () => {
+    const emailId = localStorage.getItem('EmailId');
+    navigate(`/watchlist/${emailId}`);
+  }
   const [popularmovies, setPopularMovies] = useState([]);
   const [upcomingmovies, setUpcomingMovies]=useState([]);
   const [playingmovies, setPlayingMovies]=useState([]);
@@ -50,8 +55,7 @@ const Homepage = ({ setLoginUser }) => {
   return (
     <div>
       <div className="button" onClick={handleLogout}>Logout</div>
-
-      <div className="button" onClick={() => navigate("/watchlist")}>Register</div>
+      <div className="button" onClick={handleWatchList}>WatchList</div>
 
       <h1 className="trending-title">Trending Movies</h1>
       <div className="carousel-container">
