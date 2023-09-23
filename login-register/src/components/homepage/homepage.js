@@ -3,7 +3,8 @@ import axios from 'axios';
 import MovieCard from "./MovieCard";
 import "./homepage.css";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import SearchUser from "./SearchUser";
+import SearchMovie from "./SearchMovie";
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
@@ -62,7 +63,8 @@ const Homepage = ({ setLoginUser }) => {
 
       <button onClick={handleLogout}>Logout</button>
       <button onClick={handleWatchList}>WatchList</button>
-      <SearchBar />
+      <SearchUser />
+      <SearchMovie/>
       <h1 className="trending-title">Trending Movies</h1>
       <div className="carousel-container">
         <div className="carousel">
