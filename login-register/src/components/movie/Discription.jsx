@@ -42,7 +42,7 @@ const Discription = (props) => {
             <h1>{title}</h1>
             <p>{discription}</p>
             <h4>Release Date: {date}</h4>
-            <div className="button" onClick={watchLater} >watchLater</div>
+            <button onClick={watchLater}>watchLater</button>
         </div>
     )
 }

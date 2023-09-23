@@ -60,8 +60,8 @@ const Homepage = ({ setLoginUser }) => {
     <div>
 
      
-      <div className="button" onClick={handleLogout}>Logout</div>
-      <div className="button" onClick={handleWatchList}>WatchList</div>
+<button onClick={handleLogout}>Logout</button>
+<button onClick={handleWatchList}>WatchList</button>
       <SearchBar/>
   
       <h1 className="trending-title">Trending Movies</h1>

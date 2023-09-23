@@ -134,8 +134,9 @@ app.get('/watchlist/:emailId', (req, res) => {
 
 app.get('/searchUsersByName/:name', (req, res) => {
   const { name } = req.params;
+  const regex = new RegExp(`^${name}`, 'i');
   console.log(`Searching for users by name: ${name}`);
-  User.find({ name: name})
+  User.find({ name: { $regex: regex }})
     .then((users) => {
       console.log('Found users:', users);
       res.json(users);
