@@ -3,6 +3,7 @@ import axios from 'axios';
 import MovieCard from "./MovieCard";
 import "./homepage.css";
 import {useNavigate} from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
@@ -11,6 +12,10 @@ const Upcoming=`${Base_URL}/movie/upcoming?api_key=${API_KEY}`;
 const Now_Playing=`${Base_URL}/movie/now_playing?api_key=${API_KEY}`;
 
 const Homepage = ({ setLoginUser }) => {
+
+  const [popularmovies, setPopularMovies] = useState([]);
+  const [upcomingmovies, setUpcomingMovies]=useState([]);
+  const [playingmovies, setPlayingMovies]=useState([]);
 
   const navigate = useNavigate();
 
@@ -23,11 +28,10 @@ const Homepage = ({ setLoginUser }) => {
     const emailId = localStorage.getItem('EmailId');
     navigate(`/watchlist/${emailId}`);
   }
-  const [popularmovies, setPopularMovies] = useState([]);
-  const [upcomingmovies, setUpcomingMovies]=useState([]);
-  const [playingmovies, setPlayingMovies]=useState([]);
+
 
   useEffect(() => {
+   
     axios.get(Popular)
       .then(response => {
         setPopularMovies(response.data.results);
@@ -54,9 +58,12 @@ const Homepage = ({ setLoginUser }) => {
 
   return (
     <div>
+
+     
       <div className="button" onClick={handleLogout}>Logout</div>
       <div className="button" onClick={handleWatchList}>WatchList</div>
-
+      <SearchBar/>
+  
       <h1 className="trending-title">Trending Movies</h1>
       <div className="carousel-container">
       <div className="carousel">
@@ -91,5 +98,4 @@ const Homepage = ({ setLoginUser }) => {
     </div>
   );
 }
-
 export default Homepage;

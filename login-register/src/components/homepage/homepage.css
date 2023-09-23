@@ -1,11 +1,11 @@
   body {
-    overflow-x: hidden; /* Prevent horizontal scrolling on the whole page */
+    overflow-x: hidden;
   }
   .container {
-    max-width: 1200px; /* Adjust the value as needed */
-    margin: 0 auto; /* Center the content horizontally */
-    padding: 0 20px; /* Add some padding to the sides */
-    box-sizing: border-box; /* Include padding and border in the total width */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
   .trending-title {
     text-align: center;
@@ -23,14 +23,14 @@
   .carousel {
     display: flex;
     transition: transform 0.3s ease-in-out;
-    overflow-x: auto; /* Enable horizontal scrolling */
-    overflow-y: hidden; /* Hide vertical overflow */
+    overflow-x: auto;
+    overflow-y: hidden;
     white-space: nowrap;
   }
   
   .carousel-item {
-    flex: 0 0 300px; /* Adjust the width of each item */
-    margin-right: 20px; /* Adjust spacing between items */
+    flex: 0 0 300px;
+    margin-right: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;   
@@ -50,6 +50,7 @@
     max-width: 100%;
     margin: 0 auto; 
   }
+
   
   .button {
     display: block;

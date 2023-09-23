@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require ("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -130,7 +130,20 @@ app.get('/watchlist/:emailId', (req, res) => {
     .catch(function (err) {
       console.log(err);
     });
+});
 
+app.get('/searchUsersByName/:name', (req, res) => {
+  const { name } = req.params;
+  console.log(`Searching for users by name: ${name}`);
+  User.find({ name: name})
+    .then((users) => {
+      console.log('Found users:', users);
+      res.json(users);
+    })
+    .catch((err) => {
+      console.error("Error searching for users by name:", err);
+      res.status(500).send("Internal Server Error");
+    });
 });
 
 

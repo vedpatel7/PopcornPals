@@ -6,6 +6,7 @@ import Login from "./components/login/login";
 import Register from "./components/register/register";
 import Details from './components/movie/Movie';
 import WatchList from './components/watchlist/WatchList';
+import SearchBar from './components/homepage/SearchBar';
 
 function App() {
   const [user, setLoginUser] = useState(null);
@@ -30,6 +31,7 @@ function App() {
           <Route path = "/details" element = {<GetDetails/>} />
           <Route path = "/watchlist" element={<WatchList/>}/>
           <Route path = "/watchlist/:emailId" element={<WatchList/>}/>
+          <Route path="/searchUserbyName/:name" element={<Homepage />} />
 
         </Routes>
       </Router>
