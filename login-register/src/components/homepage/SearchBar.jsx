@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function SearchBar({ onSearch }) {
+
+  const navigate= useNavigate();
   const [searchResults, setSearchResults] = useState([]);
   const [query, setQuery] = useState('');
-  // const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
   };
 
   const handleSearch = () => {
-    // console.log(query);
     console.log(`Searching for: ${query}`);
     if (query.trim() === "") {
       setSearchResults([]);
@@ -39,8 +39,7 @@ function SearchBar({ onSearch }) {
       <ul>
         {searchResults.map((result, index) => (
           <li key={index}>
-          <p>{result.name}</p>
-          <p>{result.email}</p>
+          <p onClick={()=>navigate(`/watchlist/${result.email}`)}><b>{result.name}</b> . {result.email}</p>
           </li>
         ))}
       </ul>
