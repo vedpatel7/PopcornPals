@@ -4,6 +4,7 @@ import Trailer from './Trailer';
 import Discription from './Discription';
 
 const Details=(props)=>{
+    console.log(props);
     return(
         <div>
         <Discription id={props.id}></Discription>

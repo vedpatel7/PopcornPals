@@ -18,7 +18,7 @@ function SearchUser({ onSearch }) {
       setSearchUsers([]);
       return;
     }
-    
+
     axios.get(`http://localhost:9002/searchUsersByName/${query}`)
       .then(response => {
         setSearchUsers(response.data);
@@ -36,7 +36,7 @@ function SearchUser({ onSearch }) {
         value={query}
         onChange={handleInputChange}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch}>Search User</button>
       <ul>
         {searchUsers.map((result, index) => (
           <li key={index}>

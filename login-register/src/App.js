@@ -1,11 +1,12 @@
 import './App.css'
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import Homepage from "./components/homepage/homepage";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import Details from './components/movie/Movie';
 import WatchList from './components/watchlist/WatchList';
+import { BrowserRouter as Router, Route, Routes, useLocation, useParams } from "react-router-dom";
+
 
 function App() {
   const [user, setLoginUser] = useState(null);
@@ -31,12 +32,14 @@ function App() {
           <Route path = "/watchlist" element={<WatchList/>}/>
           <Route path = "/watchlist/:emailId" element={<WatchList/>}/>
           <Route path="/searchUserbyName/:name" element={<Homepage />} />
+          <Route path="/searchMoviebyName/:id" element ={<DetailsWrapper/>}/>
 
         </Routes>
       </Router>
     </div>
   );
 }
+
 function GetDetails(){
   const location = useLocation();
   const id = location.state ? location.state.id : null;
@@ -47,6 +50,11 @@ function GetDetails(){
   )
 }
 
+function DetailsWrapper() {
+  const { id } = useParams();
+  console.log(id);
+  return <Details id= {id} />;
+}
 
 export default App;
 

@@ -39,7 +39,7 @@ function SearchMovie({ onSearch }) {
       <ul>
         {searchMovies.map((result, index) => (
           <li key={index}>
-          <p onClick={()=>navigate(`/watchlist/${result.id}`)}><b>{result.title}</b> . {result.id}</p>
+          <p onClick={()=>navigate(`/searchMoviebyName/${result.id}`)}><b>{result.title}</b> . {result.id}</p>
           </li>
         ))}
       </ul>
