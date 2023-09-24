@@ -59,12 +59,12 @@ const Homepage = ({ setLoginUser }) => {
 
   return (
     <div>
-
-
-      <button onClick={handleLogout}>Logout</button>
+      <div className="search-bars">
+        <SearchUser />
+        <SearchMovie/>
+        <button onClick={handleLogout}>Logout</button>
       <button onClick={handleWatchList}>WatchList</button>
-      <SearchUser />
-      <SearchMovie/>
+      </div>
       <h1 className="trending-title">Trending Movies</h1>
       <div className="carousel-container">
         <div className="carousel">
