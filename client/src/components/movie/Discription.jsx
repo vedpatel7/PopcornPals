@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import "./movie.css";
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const getDiscription = (id) => {
@@ -39,10 +40,14 @@ const Discription = (props) => {
 
     return (
         <div>
-            <h1>{title}</h1>
+        <div className="watchlater">
+        <h1>{title}</h1>
+        <button onClick={watchLater}>watchLater</button>
+        </div>
+            
             <p>{discription}</p>
             <h4>Release Date: {date}</h4>
-            <button onClick={watchLater}>watchLater</button>
+            
         </div>
     )
 }

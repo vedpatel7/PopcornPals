@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from "react";
+import "./movie.css";
+
 const API_KEY='84edaeedd68b9e73abbe95b5bb70617a';
 const getVideos = (id)=>{
     return `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
