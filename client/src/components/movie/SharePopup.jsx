@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const SharePopup = ({ movieId, onClose }) => {
-
     const [userList, setUserList] = useState([]);
+    const emailId = localStorage.getItem('EmailId');
 
-    const emailId = localStorage.getItem('EmailId')
     const [suggestion, setSuggestion] = useState({
         sender: emailId,
         receiver: "",
@@ -22,20 +21,21 @@ const SharePopup = ({ movieId, onClose }) => {
             });
     }, []);
 
-
+    useEffect(() => {
+        if (suggestion.receiver !== "") {
+            axios.post("http://localhost:9002/addSuggestion", suggestion)
+                .then(res => {
+                    alert(res.data.message)
+                });
+        }
+    }, [suggestion]);
 
     const handleUserClick = (user) => {
         setSuggestion(prevSuggestion => ({
             ...prevSuggestion,
             receiver: user.email,
         }));
-        axios.post("http://localhost:9002/addSuggestion",suggestion)
-            .then(res => {
-                alert(res.data.message)
-            })
-
     };
-
 
     return (
         <div className="share-popup">
