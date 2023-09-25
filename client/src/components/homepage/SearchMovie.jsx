@@ -28,7 +28,7 @@ function SearchMovie({ onSearch }) {
   };
 
   return (
-    <div>
+    <div className="search">
       <input
         type="text"
         placeholder="Search..."
@@ -36,6 +36,7 @@ function SearchMovie({ onSearch }) {
         onChange={handleInputChange}
       />
       <button onClick={handleSearchMovie}>Search Movie</button>
+      <div className="search-results">
       <ul>
         {searchMovies.map((result, index) => (
           <li key={index}>
@@ -43,6 +44,7 @@ function SearchMovie({ onSearch }) {
           </li>
         ))}
       </ul>
+      </div>
 
 
     </div>
