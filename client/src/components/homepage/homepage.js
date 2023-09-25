@@ -30,6 +30,10 @@ const Homepage = ({ setLoginUser }) => {
     navigate(`/watchlist/${emailId}`);
   }
 
+  const hadleSuggestion=()=>{
+    const emailId = localStorage.getItem('EmailId');
+    navigate(`suggestion/${emailId}`);
+  }
 
   useEffect(() => {
 
@@ -64,6 +68,7 @@ const Homepage = ({ setLoginUser }) => {
         <SearchMovie/>
         <button onClick={handleLogout}>Logout</button>
       <button onClick={handleWatchList}>WatchList</button>
+      <button onClick={hadleSuggestion}>Suggestions</button>
       </div>
       <h1 className="trending-title">Trending Movies</h1>
       <div className="carousel-container">

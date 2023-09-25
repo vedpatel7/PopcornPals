@@ -184,6 +184,20 @@ app.post("/addSuggestion", (req, res) => {
     });
 });
 
+app.get('/suggestions/:email', (req, res) => {
+  // console.log("nnnnnnni");
+  const { email } = req.params;
+  // console.log(email);
+  Suggestion.find({receiver:`${email}`})
+    .then((suggestion) => {
+      // console.log(suggestion);
+      res.json(suggestion);
+    })
+    .catch((err) => {
+      console.error("Error searching for users by name:", err);
+      res.status(500).send("Internal Server Error");
+    });
+});
 
 app.listen(9002, () => {
   console.log("Started on port 9002")
