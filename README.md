@@ -10,17 +10,6 @@
 
 
 
-
-
-## Tech Stack
-
-**Client:** React, CSS
-
-**Server:** Node, Express
-
-**Database:** MongoDB
-
-
 ## Features
 
 - User profile
@@ -31,3 +20,10 @@
 - Watchlist Management
 
 
+## Tech Stack
+
+**Client:** React, CSS
+
+**Server:** Node, Express
+
+**Database:** MongoDB
