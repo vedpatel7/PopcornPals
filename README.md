@@ -30,4 +30,4 @@
 
 ## Feedback
 
-If you have any feedback, please reach out to me at vedvirpara2004@gmail.com<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Pink%20Heart.png" alt="Pink Heart" width="25" height="25" />
+If you have any feedback, please reach out to me at vedvirpara2004@gmail.com<img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Beating%20Heart.png" alt="Beating Heart" width="25" height="25" />
