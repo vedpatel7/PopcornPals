@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useRef, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./movie.css";
+import SharePopup from './SharePopup';
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const getDiscription = (id) => {
@@ -12,6 +13,17 @@ const Discription = (props) => {
     const [discription, setDiscription] = useState('');
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
+    const [isPopupOpen, setPopupOpen] = useState(false);
+
+    const openPopup = () => {
+        setPopupOpen(true);
+    };
+
+    const closePopup = () => {
+        setPopupOpen(false);
+    };
+
+
     useEffect(() => {
         axios.get(getDiscription(props.id))
             .then(response => {
@@ -23,9 +35,10 @@ const Discription = (props) => {
                 setDate(date);
             })
             .catch(err => { console.log(err) })
-    },[props.id])
+    }, [props.id])
 
     const navigate = useNavigate();
+
     const watchLater = () => {
         const emailId = JSON.stringify(localStorage.getItem('EmailId'))
         const movie = {
@@ -38,16 +51,22 @@ const Discription = (props) => {
             })
     }
 
+
     return (
         <div>
-        <div className="watchlater">
-        <h1>{title}</h1>
-        <button onClick={watchLater}>watchLater</button>
-        </div>
-            
+            <div className="watchlater">
+                <h1>{title}</h1>
+                <div>
+                    <button onClick={watchLater}>WatchLater</button>
+                    <button onClick={openPopup}>Share</button>
+                </div>
+            </div>
+            {isPopupOpen && (
+                <SharePopup movieId={props.id} onClose={closePopup} />
+            )}
             <p>{discription}</p>
             <h4>Release Date: {date}</h4>
-            
+
         </div>
     )
 }

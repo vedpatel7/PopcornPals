@@ -1,4 +1,4 @@
-const express = require ("express");
+const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -30,6 +30,13 @@ const movieSchema = new mongoose.Schema({
   movieIds: [String]
 });
 
+const suggestSchema = new mongoose.Schema({
+  sender: String,
+  receiver: String,
+  MovieId: String
+})
+
+const Suggestion = mongoose.model("Suggestion", suggestSchema)
 const User = mongoose.model("User", userSchema)
 const Movie = mongoose.model("Movie", movieSchema)
 
@@ -100,7 +107,7 @@ app.post("/watchlist", (req, res) => {
             console.error("Error adding movie:", err);
             res.status(500).send("Internal Server Error");
           });
-          
+
       } else {
         const newMovie = new Movie({
           emailId: emailId,
@@ -123,7 +130,7 @@ app.post("/watchlist", (req, res) => {
 
 app.get('/watchlist/:emailId', (req, res) => {
   const { emailId } = req.params;
-    Movie.findOne({ emailId:`"${emailId}"`})
+  Movie.findOne({ emailId: `"${emailId}"` })
     .then((movie) => {
       res.json(movie.movieIds);
     })
@@ -136,13 +143,43 @@ app.get('/searchUsersByName/:name', (req, res) => {
   const { name } = req.params;
   const regex = new RegExp(`^${name}`, 'i');
   // console.log(`Searching for users by name: ${name}`);
-  User.find({ name: { $regex: regex }})
+  User.find({ name: { $regex: regex } })
     .then((users) => {
       // console.log('Found users:', users);
       res.json(users);
     })
     .catch((err) => {
       console.error("Error searching for users by name:", err);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
+app.get('/userList', (req, res) => {
+  User.find({})
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((err) => {
+      console.error("Error fetching user list:", err);
+      res.status(500).send("Internal Server Error");
+    });
+})
+
+app.post("/addSuggestion", (req, res) => {
+  const { sender, receiver, movieId } = req.body;
+  // console.log(req.body);
+  const suggestion = new Suggestion({
+    sender: sender,
+    receiver: receiver,
+    MovieId: movieId,
+  });
+
+  suggestion.save()
+    .then(() => {
+      res.send({ message: "Suggestion added successfully" });
+    })
+    .catch((err) => {
+      console.error("Error adding suggestion:", err);
       res.status(500).send("Internal Server Error");
     });
 });
