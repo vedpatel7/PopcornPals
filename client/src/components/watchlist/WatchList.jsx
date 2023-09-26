@@ -17,11 +17,21 @@ const WatchList=()=>{
         });
     }, [emailId]);
 
+    const removeFromWatchlist = (movieIdToRemove) => {
+      axios.delete(`http://localhost:9002/watchlist/${emailId}/${movieIdToRemove}`)
+        .then(response => {
+          setMovieIds(prevMovieIds => prevMovieIds.filter(id => id !== movieIdToRemove));
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    };
+
     return(
         <div>
         <ul>
         {movieIds.map((movieId, index) => (
-          <li key={index}>{movieId}</li>
+          <li key={index}>{movieId}<button onClick={() => removeFromWatchlist(movieId)}>Remove</button></li>
         ))}
       </ul>
         </div>

@@ -139,6 +139,34 @@ app.get('/watchlist/:emailId', (req, res) => {
     });
 });
 
+app.delete('/watchlist/:emailId/:movieId', (req, res) => {
+  const { emailId, movieId } = req.params;
+  // console.log(emailId . movieId)
+  Movie.findOne({ emailId: `"${emailId}"` })
+    .then((movie) => {
+      if (!movie) {
+        res.status(404).send({ message: "Watchlist not found" });
+        return;
+      }
+
+      movie.movieIds = movie.movieIds.filter(id => id !== movieId);
+
+      movie.save()
+        .then(() => {
+          res.send({ message: "Movie removed from watchlist" });
+        })
+        .catch((err) => {
+          console.error("Error removing movie from watchlist:", err);
+          res.status(500).send("Internal Server Error");
+        });
+    })
+    .catch((err) => {
+      console.error("Error finding watchlist:", err);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
+
 app.get('/searchUsersByName/:name', (req, res) => {
   const { name } = req.params;
   const regex = new RegExp(`^${name}`, 'i');
@@ -188,7 +216,7 @@ app.get('/suggestions/:email', (req, res) => {
   // console.log("nnnnnnni");
   const { email } = req.params;
   // console.log(email);
-  Suggestion.find({receiver:`${email}`})
+  Suggestion.find({ receiver: `${email}` })
     .then((suggestion) => {
       // console.log(suggestion);
       res.json(suggestion);
@@ -198,6 +226,7 @@ app.get('/suggestions/:email', (req, res) => {
       res.status(500).send("Internal Server Error");
     });
 });
+
 
 app.listen(9002, () => {
   console.log("Started on port 9002")
