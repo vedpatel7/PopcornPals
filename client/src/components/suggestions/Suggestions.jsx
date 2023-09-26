@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Suggestion=(props)=>{
+  const navigate= useNavigate();
     // const { email } = useParams();
     const [suggestions, setSuggestions] = useState([]);
     // console.log(props.email);
@@ -21,7 +22,7 @@ const Suggestion=(props)=>{
         <div>
         <ul>
         {suggestions.map((suggestion, index) => (
-          <li key={index}>{suggestion.MovieId} . {suggestion.sender}</li>
+          <li key={index}><p onClick={()=>navigate(`/searchMoviebyName/${suggestion.MovieId}`)}>{suggestion.MovieId} suggested by {suggestion.sender}</p></li>
         ))}
       </ul>
         </div>
