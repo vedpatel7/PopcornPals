@@ -2,6 +2,8 @@ import React, {useState} from "react"
 import "./register.css"
 import axios from "axios"
 import {useNavigate} from "react-router-dom"
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
 
 const Register = () => {
 
@@ -36,17 +38,52 @@ const Register = () => {
         
     }
 
+    const [show, setShow] = React.useState(false)
+    const handleClick = () => setShow(!show)
+
     return (
+        <div className="container">
         <div className="register">
-            {console.log("User", user)}
             <h1>Register</h1>
-            <input type="text" name="name" value={user.name} placeholder="Your Name" onChange={ handleChange }></input>
-            <input type="text" name="email" value={user.email} placeholder="Your Email" onChange={ handleChange }></input>
-            <input type="password" name="password" value={user.password} placeholder="Your Password" onChange={ handleChange }></input>
-            <input type="password" name="reEnterPassword" value={user.reEnterPassword} placeholder="Re-enter Password" onChange={ handleChange }></input>
-            <div className="button" onClick={register} >Register</div>
+            <Input variant='outline' type="text" name="name" value={user.name} onChange={handleChange} placeholder='Name' ></Input>
+            <Input variant='outline' type="text" name="email" value={user.email} onChange={handleChange} placeholder='Email' ></Input>
+
+            <InputGroup size='md' >
+                <Input variant='outline'
+                pr='4.5rem'
+                type={show ? 'text' : 'password'}
+                name="password" 
+                placeholder='Enter password'
+                value={user.password} onChange={handleChange}
+                />
+                <InputRightElement width='4.5rem'>
+                    <Button h='1.75rem' size='sm' onClick={handleClick}>
+                        {show ? 'Hide' : 'Show'}
+                    </Button>
+                </InputRightElement>
+            </InputGroup>
+
+            <InputGroup size='md'>
+                <Input variant='outline'
+                pr='4.5rem'
+                type={show ? 'text' : 'password'}
+                name="reEnterPassword" value={user.reEnterPassword}
+                placeholder="Re-enter Password"
+                 onChange={handleChange}
+                />
+                <InputRightElement width='4.5rem'>
+                    <Button h='1.75rem' size='sm' onClick={handleClick}>
+                        {show ? 'Hide' : 'Show'}
+                    </Button>
+                </InputRightElement>
+            </InputGroup>
+            {/* <div className="button" onClick={register} >Register</div> */}
+            <Button colorScheme='blue' onClick={register}>Register</Button>
+            
+            {/* <div className="button" onClick={() => navigate("/login")}>Login</div> */}
             <div>or</div>
-            <div className="button" onClick={() => navigate("/login")}>Login</div>
+            <Button colorScheme="blue" onClick={() => navigate("/login")}>Login</Button>
+        </div>
         </div>
     )
 }

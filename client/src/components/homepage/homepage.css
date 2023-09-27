@@ -60,7 +60,7 @@ body {
   }
 
   
-  button {
+  /* button {
     margin: 8px;
     padding: 10px 20px;
     background-color: #333;
@@ -72,8 +72,8 @@ body {
   
   button:hover {
     background-color: #0056b3;
-  }
-
+  } */
+/* 
   input[type="text"] {
     width: 300px;
     padding: 10px;
@@ -81,7 +81,7 @@ body {
     border-radius: 4px;
     margin-bottom: 10px;
   }
-  
+   */
   ul {
     list-style: none;
     padding: 0;
