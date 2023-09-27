@@ -22,7 +22,7 @@
 
 ## Tech Stack
 
-**Client:** React, CSS
+**Client:** React, Chakra UI
 
 **Server:** Node, Express
 
