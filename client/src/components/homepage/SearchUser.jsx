@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
+import { SearchIcon } from '@chakra-ui/icons'
 
 function SearchUser({ onSearch }) {
   const navigate = useNavigate();
@@ -32,25 +35,22 @@ function SearchUser({ onSearch }) {
 
   return (
     <div className="search">
-      <input
-        type="text"
-        placeholder="Search..."
+      <Input variant='outline' type="text"
+        placeholder="Search user"
         value={query}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleSearch}>Search User</button>
-      
-        <div className="search-results">
-          <ul>
-            {searchUsers.map((result, index) => (
-              <li key={index}>
-                <p onClick={() => navigate(`/watchlist/${result.email}`)}>
-                  <b>{result.name}</b> . {result.email}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
+        onChange={handleInputChange} name="search user"></Input>
+      <Button colorScheme='blue' onClick={handleSearch}><SearchIcon></SearchIcon></Button>
+      <div className="search-results">
+        <ul>
+          {searchUsers.map((result, index) => (
+            <li key={index}>
+              <p onClick={() => navigate(`/watchlist/${result.email}`)}>
+                <b>{result.name}</b> . {result.email}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
+import { ViewIcon,ViewOffIcon } from '@chakra-ui/icons'
 
 const Login = ({setLoginUser}) => {
 
@@ -52,14 +53,12 @@ const Login = ({setLoginUser}) => {
                 />
                 <InputRightElement width='4.5rem'>
                     <Button h='1.75rem' size='sm' onClick={handleClick}>
-                        {show ? 'Hide' : 'Show'}
+                        {show ? <ViewIcon/> : <ViewOffIcon/>}
                     </Button>
                 </InputRightElement>
             </InputGroup>
-            {/* <button onClick={login}>Login </button> */}
             <Button colorScheme='blue' onClick={login}>Login</Button>
             <div>or</div>
-            {/* <button onClick={() => navigate("/register")}>Register</button> */}
             <Button colorScheme='blue' onClick={() => navigate("/register")}>Register</Button>
         </div>
         </div>

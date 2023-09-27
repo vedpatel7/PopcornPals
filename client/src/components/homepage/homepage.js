@@ -5,6 +5,8 @@ import "./homepage.css";
 import { useNavigate } from "react-router-dom";
 import SearchUser from "./SearchUser";
 import SearchMovie from "./SearchMovie";
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
