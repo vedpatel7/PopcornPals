@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useRef, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const WatchList=()=>{
+  const navigate = useNavigate();
     const { emailId } = useParams();
     const [movieIds, setMovieIds] = useState([]);
   
@@ -31,7 +32,7 @@ const WatchList=()=>{
         <div>
         <ul>
         {movieIds.map((movieId, index) => (
-          <li key={index}>{movieId}<button onClick={() => removeFromWatchlist(movieId)}>Remove</button></li>
+          <li key={index}  onClick={()=>navigate(`/searchMoviebyName/${movieId}`)}>{movieId}<button onClick={() => removeFromWatchlist(movieId)}>Remove</button></li>
         ))}
       </ul>
         </div>
@@ -39,3 +40,5 @@ const WatchList=()=>{
 }
 
 export default WatchList;
+
+// https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}
