@@ -1,0 +1,50 @@
+.Watchlist{
+    display: flex;
+    flex-wrap: wrap;
+}
+.button-container {
+    position: absolute;
+    top: 10px; 
+    right: 10px; 
+  }
+.Watchlist.movie-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    margin: 10px;
+    max-width: 300px;
+
+  }
+  
+  .Watchlist.movie-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .Watchlist.movie-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .Watchlist.movie-details {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+  }
+  
+  .movie-title {
+    font-size: 1.2rem;
+    margin: 5px 0;
+  }
+  
+  .movie-release-date {
+    font-size: 0.9rem;
+  }
+  
+
+  
