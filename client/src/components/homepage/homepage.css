@@ -124,7 +124,10 @@ li {
 .search-bars {
   display: flex;
   justify-content: stretch; 
-  margin-bottom: 20px;
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  justify-content: space-between;
+
 }
 
 /* Style for individual search bars (adjust width as needed) */
@@ -147,4 +150,5 @@ li {
   max-height: 200px; /* Limit the height if needed */
   overflow-y: auto; /* Add scrolling for overflow */
 }
+
 

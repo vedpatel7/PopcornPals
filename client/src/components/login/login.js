@@ -55,6 +55,9 @@ const Login = ({setLoginUser}) => {
                     <Button h='1.75rem' size='sm' onClick={handleClick}>
                         {show ? <ViewIcon/> : <ViewOffIcon/>}
                     </Button>
+                    {/* <p h='1.75rem' size='sm' onClick={handleClick}>
+                        {show ? <ViewIcon/> : <ViewOffIcon/>}
+                    </p> */}
                 </InputRightElement>
             </InputGroup>
             <Button colorScheme='blue' onClick={login}>Login</Button>
@@ -66,12 +69,3 @@ const Login = ({setLoginUser}) => {
 }
 
 export default Login;
-
-
-// function PasswordInput() {
-   
-  
-//     return (
-    
-//     )
-//   }

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
+import "./Searchbar.css";
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 
@@ -31,7 +32,7 @@ function SearchMovie({ onSearch }) {
   };
 
   return (
-    <div className="search">
+    <div className="searchbar">
       <Input variant='outline' type="text"
         placeholder="Search movie"
         value={query}

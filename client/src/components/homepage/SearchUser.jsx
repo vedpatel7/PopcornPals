@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
+import "./Searchbar.css";
+// import "./homepage.css";
 
 function SearchUser({ onSearch }) {
   const navigate = useNavigate();
@@ -34,7 +36,7 @@ function SearchUser({ onSearch }) {
   };
 
   return (
-    <div className="search">
+    <div className="searchbar">
       <Input variant='outline' type="text"
         placeholder="Search user"
         value={query}

@@ -1,0 +1,11 @@
+.searchbar{
+        display: flex;
+}
+.searchbar > input {
+    font-size: 1rem;
+    width: 25rem;
+  }
+  
+  .searchbar button {
+    width:20%
+  }
