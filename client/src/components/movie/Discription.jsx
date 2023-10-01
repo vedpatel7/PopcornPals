@@ -1,12 +1,10 @@
 import axios from 'axios';
-import React, { useRef, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./movie.css";
 import SharePopup from './SharePopup';
-import { Button, ButtonGroup } from '@chakra-ui/react'
 import { AddIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { useToast } from '@chakra-ui/react'
-
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const getDiscription = (id) => {
@@ -19,7 +17,8 @@ const Discription = (props) => {
     const [date, setDate] = useState('');
     const [isPopupOpen, setPopupOpen] = useState(false);
 
-    const toast = useToast()
+    const toast = useToast();
+    const navigate = useNavigate();
 
     const openPopup = () => {
         setPopupOpen(true);
@@ -28,7 +27,6 @@ const Discription = (props) => {
     const closePopup = () => {
         setPopupOpen(false);
     };
-
 
     useEffect(() => {
         axios.get(getDiscription(props.id))
@@ -41,36 +39,53 @@ const Discription = (props) => {
                 setDate(date);
             })
             .catch(err => { console.log(err) })
-    }, [props.id])
-
-    const navigate = useNavigate();
+    }, [props.id]);
 
     const watchLater = () => {
-        const emailId = JSON.stringify(localStorage.getItem('EmailId'))
+        const emailId = JSON.stringify(localStorage.getItem('EmailId'));
         const movie = {
             emailId: emailId,
             movieId: props.id
         };
         axios.post("http://localhost:9002/watchlist", movie)
-            .then(res => {
-            })
-    }
-
+        .then(res => {
+            if (res.data.message === "Successfully added") {
+                toast({
+                    title: 'Added to the watchlist',
+                    status: 'success',
+                    position: 'top',
+                    duration: 9000,
+                    isClosable: true
+                });
+            } else if (res.data.message === "Movie already in watchlist") {
+                toast({
+                    title: 'alredy there in the watchlist',
+                    status: 'warning',
+                    position: 'top',
+                    duration: 9000,
+                    isClosable: true
+                });
+            } else {
+                toast({
+                    title: 'unable to add to the watchlist',
+                    status: 'error',
+                    position: 'top',
+                    duration: 9000,
+                    isClosable: true
+                });
+            }
+        })
+        .catch(err => {
+            console.error("Error adding movie:", err);
+        });
+    };
 
     return (
         <div>
             <div className="watchlater">
                 <h1>{title}</h1>
                 <div style={{ display: 'flex', gap: '40px', marginRight: '40px', marginTop: '20px' }}>
-                    <p onClick={() => {
-                        watchLater(); toast({
-                            title: 'added to the watchlist',
-                            status: 'success',
-                            position: 'top',
-                            duration: 9000,
-                            isClosable: true
-                        });
-                    }} style={{ cursor: 'pointer', fontSize: '23px' }}>
+                    <p onClick={watchLater} style={{ cursor: 'pointer', fontSize: '23px' }}>
                         <AddIcon />
                     </p>
                     <p onClick={openPopup} style={{ cursor: 'pointer', fontSize: '23px' }}>
@@ -83,8 +98,8 @@ const Discription = (props) => {
             )}
 
             <p>{discription}</p>
-
         </div>
     )
 }
+
 export default Discription;
