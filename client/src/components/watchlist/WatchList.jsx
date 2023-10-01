@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./WatchList.css"; 
+import { CloseIcon } from '@chakra-ui/icons'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
@@ -54,23 +54,32 @@ const WatchList = () => {
   };
 
   return (
-    <div className='Watchlist'>
-      <ul>
-        {movieDetails.map((movieDetail, index) => (
-          <li key={index}>
-            <div className="movie-card" >
-              <div className="button-container">
-                <button onClick={() => removeFromWatchlist(movieDetail.id)}>Remove</button>
-              </div>
-              <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} />
-              <div className="movie-details">
-                <h1 className="movie-title">{movieDetail.title}</h1>
-                <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>more details</p>
-              </div>
+    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      {movieDetails.map((movieDetail, index) => (
+        <div key={index} style={{ width: '20%', padding: '10px', position: 'relative' }}>
+          <div className="movie-card">
+            <button
+              onClick={() => removeFromWatchlist(movieDetail.id)}
+              style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                color: 'White',
+                border: 'none',
+                cursor: 'pointer',
+                zIndex: '1',
+              }}
+            >
+              <CloseIcon></CloseIcon>
+            </button>
+            <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
+            <div className="movie-details">
+              <h1 className="movie-title">{movieDetail.title}</h1>
+              <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>more details</p>
             </div>
-          </li>
-        ))}
-      </ul>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
