@@ -3,6 +3,8 @@ import React, { useRef, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./movie.css";
 import SharePopup from './SharePopup';
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { AddIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const getDiscription = (id) => {
@@ -56,16 +58,20 @@ const Discription = (props) => {
         <div>
             <div className="watchlater">
                 <h1>{title}</h1>
-                <div>
-                    <button onClick={watchLater}>WatchLater</button>
-                    <button onClick={openPopup}>Share</button>
+                <div style={{ display: 'flex', gap: '40px', marginRight: '40px', marginTop: '20px' }}>
+                    <p onClick={watchLater} style={{ cursor: 'pointer', fontSize: '23px'}}>
+                        <AddIcon />
+                    </p>
+                    <p onClick={openPopup} style={{ cursor: 'pointer', fontSize: '23px' }}>
+                        <ExternalLinkIcon />
+                    </p>
                 </div>
             </div>
             {isPopupOpen && (
                 <SharePopup movieId={props.id} onClose={closePopup} />
             )}
+
             <p>{discription}</p>
-            <h4>Release Date: {date}</h4>
 
         </div>
     )

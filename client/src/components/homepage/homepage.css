@@ -16,13 +16,17 @@ body {
     font-weight: bold;
     margin-top: 20px;
     margin-bottom: 10px;
-    color: #fff;
+    color: #ffffff;
+    text-align: center;
   }
   .carousel-container {
     display: flex;
     overflow-x: auto;
     width: 100%;
     margin-bottom: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #D83F87 transparent;
+    background-color: #a4b3b611;
   }
   
   .carousel {
@@ -31,6 +35,9 @@ body {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
+    /* scroll-margin-top: 200px; */
+    scrollbar-width:10px;
+    scrollbar-color: #D83F87 transparent; 
   }
   
   .carousel-item {
@@ -48,6 +55,19 @@ body {
     width: 100%;
     height: auto;
     object-fit: cover;
+  }
+  
+  .carousel::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .carousel::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  .carousel::-webkit-scrollbar-thumb {
+    background-color: #d83f8664;
+    border-radius: 5px;
   }
   
   .movie-info {

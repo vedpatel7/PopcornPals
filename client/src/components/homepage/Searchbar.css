@@ -24,3 +24,18 @@
     width: 100%;
     color: white;
   }
+
+  .search-results::-webkit-scrollbar-track {
+    background-color: #201843;
+  }
+  
+  /* Style the scrollbar itself (thumb) */
+  .search-results::-webkit-scrollbar-thumb {
+    background-color: #D83F87; /* Set the color of the scrollbar thumb */
+    border-radius: 5px; /* Add some border-radius for rounded corners */
+  }
+  
+  /* Style the scrollbar on hover */
+  .search-results::-webkit-scrollbar-thumb:hover {
+    background-color: #FF0066; /* Change the color on hover */
+  }
