@@ -5,6 +5,8 @@ import "./movie.css";
 import SharePopup from './SharePopup';
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { AddIcon, ExternalLinkIcon } from '@chakra-ui/icons'
+import { useToast } from '@chakra-ui/react'
+
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const getDiscription = (id) => {
@@ -16,6 +18,8 @@ const Discription = (props) => {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
     const [isPopupOpen, setPopupOpen] = useState(false);
+
+    const toast = useToast()
 
     const openPopup = () => {
         setPopupOpen(true);
@@ -49,7 +53,6 @@ const Discription = (props) => {
         };
         axios.post("http://localhost:9002/watchlist", movie)
             .then(res => {
-                alert(res.data.message)
             })
     }
 
@@ -59,7 +62,15 @@ const Discription = (props) => {
             <div className="watchlater">
                 <h1>{title}</h1>
                 <div style={{ display: 'flex', gap: '40px', marginRight: '40px', marginTop: '20px' }}>
-                    <p onClick={watchLater} style={{ cursor: 'pointer', fontSize: '23px'}}>
+                    <p onClick={() => {
+                        watchLater(); toast({
+                            title: 'added to the watchlist',
+                            status: 'success',
+                            position: 'top',
+                            duration: 9000,
+                            isClosable: true
+                        });
+                    }} style={{ cursor: 'pointer', fontSize: '23px' }}>
                         <AddIcon />
                     </p>
                     <p onClick={openPopup} style={{ cursor: 'pointer', fontSize: '23px' }}>

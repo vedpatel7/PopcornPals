@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useToast } from '@chakra-ui/react';
 
 const SharePopup = ({ movieId, onClose }) => {
     const [userList, setUserList] = useState([]);
     const emailId = localStorage.getItem('EmailId');
+
+    const toast = useToast();
 
     const [suggestion, setSuggestion] = useState({
         sender: emailId,
@@ -25,7 +28,7 @@ const SharePopup = ({ movieId, onClose }) => {
         if (suggestion.receiver !== "") {
             axios.post("http://localhost:9002/addSuggestion", suggestion)
                 .then(res => {
-                    alert(res.data.message)
+                    // alert(res.data.message)
                 });
         }
     }, [suggestion]);
@@ -35,6 +38,14 @@ const SharePopup = ({ movieId, onClose }) => {
             ...prevSuggestion,
             receiver: user.email,
         }));
+
+        toast({
+            title: 'Successfully suggested',
+            status: 'success',
+            position: 'top',
+            duration: 9000,
+            isClosable: true
+        });
     };
 
     return (
@@ -42,7 +53,9 @@ const SharePopup = ({ movieId, onClose }) => {
             <h2>Share with Users</h2>
             <ul>
                 {userList.map((user) => (
-                    <li key={user.id} onClick={() => handleUserClick(user)}>{user.name} . {user.email}</li>
+                    <li key={user.id} onClick={() => handleUserClick(user)}>
+                        {user.name} . {user.email}
+                    </li>
                 ))}
             </ul>
             <button onClick={onClose}>Close</button>
