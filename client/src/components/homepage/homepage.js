@@ -63,8 +63,12 @@ const Homepage = ({ setLoginUser }) => {
 
   }, []);
 
+  const imageUrl = 'https://drive.google.com/uc?export=view&id=1ivYJ-sw7jsJDlwERUV4IE-SaUt-c36OR';
   return (
     <div>
+     <div style={{ display: 'flex',justifyContent: 'center', alignItems: 'center', height: '20vh',  }}>
+    <img src={imageUrl} style={{ width: '200px',height:'auto' }}></img>
+    </div>
       <div className="search-bars">
         <SearchUser />
         <SearchMovie/>
