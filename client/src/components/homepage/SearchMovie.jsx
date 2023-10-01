@@ -5,6 +5,7 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 import "./Searchbar.css";
+import { resolveMotionValue } from 'framer-motion';
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 
@@ -24,7 +25,9 @@ function SearchMovie({ onSearch }) {
     }
     axios.get(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=84edaeedd68b9e73abbe95b5bb70617a`)
       .then(response => {
+        // console.log(response.data.results);
         setSearchMovies(response.data.results);
+        // console.log(searchMovies);
       })
       .catch(err => {
         console.error("Error searching for movie by name:", err);

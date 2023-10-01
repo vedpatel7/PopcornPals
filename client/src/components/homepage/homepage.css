@@ -134,21 +134,7 @@ li {
 
 /* Style for search buttons */
 
-/* CSS */
-.search {
-  position: relative; /* Ensure relative positioning for the container */
-}
 
-.search-results {
-  position: absolute; /* Position the results absolutely */
-  top: 100%; /* Position below the input */
-  left: 0;
-  z-index: 999; /* Ensure it's on top of other content */
-  background-color: #fff; /* Add a background color */
-  border: 1px solid #ccc; /* Add a border for visibility */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a shadow for a card-like effect */
-  max-height: 200px; /* Limit the height if needed */
-  overflow-y: auto; /* Add scrolling for overflow */
-}
+
 
 
