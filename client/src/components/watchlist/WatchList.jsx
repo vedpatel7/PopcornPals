@@ -45,7 +45,8 @@ const WatchList = () => {
   const removeFromWatchlist = (movieIdToRemove) => {
     axios.delete(`http://localhost:9002/watchlist/${emailId}/${movieIdToRemove}`)
       .then(response => {
-        setMovieIds(prevMovieIds => prevMovieIds.filter(id => id !== movieIdToRemove));
+        // Remove the movie from movieDetails without the one being removed
+        setMovieDetails(prevMovieDetails => prevMovieDetails.filter(movie => movie.id !== movieIdToRemove));
       })
       .catch(err => {
         console.log(err);
@@ -57,14 +58,14 @@ const WatchList = () => {
       <ul>
         {movieDetails.map((movieDetail, index) => (
           <li key={index}>
-            <div className="movie-card" onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>
+            <div className="movie-card" >
               <div className="button-container">
                 <button onClick={() => removeFromWatchlist(movieDetail.id)}>Remove</button>
               </div>
               <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} />
               <div className="movie-details">
                 <h1 className="movie-title">{movieDetail.title}</h1>
-                <p className="movie-release-date">{movieDetail.release_date}</p>
+                <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>more details</p>
               </div>
             </div>
           </li>
