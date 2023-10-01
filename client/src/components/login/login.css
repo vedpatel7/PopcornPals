@@ -1,4 +1,11 @@
 
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .login {
     width: 400px;
     background: #fff;
@@ -11,24 +18,13 @@
 }
 
 .login > input {
-    border-radius: 8px;
-    border: 2px solid #dddfe2;
-    outline: none;
-    color: #1d2129;
     margin: 0.5rem 0;
     padding: 0.5rem 0.75rem;
-    width: 92%;
     font-size: 1rem;
 }
 
-.login > .button {
-    background: #1877f2;
-    border: 1px solid #1877f2;
-    color: #fff;
-    font-size: 1.25rem;
+.login button {
     padding: 0.5rem;
     margin: 0.5rem 0;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
+    width:60%
 }

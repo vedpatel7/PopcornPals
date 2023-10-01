@@ -1,26 +1,29 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { CloseIcon } from '@chakra-ui/icons'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
 
-const WatchList = () => {
+const Suggestion = (props) => {
   const navigate = useNavigate();
-  const { emailId } = useParams();
-  const [movieIds, setMovieIds] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [movieDetails, setMovieDetails] = useState([]);
+  const [movieIds, setMovieIds] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:9002/watchlist/${emailId}`)
+    axios.get(`http://localhost:9002/suggestions/${props.email}`)
       .then(response => {
-        setMovieIds(response.data);
+        setSuggestions(response.data);
+        // Extract movie IDs from suggestions
+        const movieIds = response.data.map(suggestion => suggestion.MovieId);
+        setMovieIds(movieIds);
       })
       .catch(err => {
         console.log(err);
       });
-  }, [emailId]);
+  }, [props.email]);
 
   useEffect(() => {
     const fetchMovieDetails = () => {
@@ -31,35 +34,32 @@ const WatchList = () => {
       axios.all(promises)
         .then(axios.spread((...responses) => {
           const movieDetails = responses.map(response => response.data);
-          const filteredMovieDetails = movieDetails.filter(movie => movie !== null);
-          setMovieDetails(filteredMovieDetails);
+          setMovieDetails(movieDetails);
         }))
         .catch(err => {
           console.log(err);
         });
     };
 
-    fetchMovieDetails();
+    if (movieIds.length > 0) {
+      fetchMovieDetails();
+    }
   }, [movieIds]);
-
-  const removeFromWatchlist = (movieIdToRemove) => {
-    axios.delete(`http://localhost:9002/watchlist/${emailId}/${movieIdToRemove}`)
-      .then(response => {
-        // Remove the movie from movieDetails without the one being removed
-        setMovieDetails(prevMovieDetails => prevMovieDetails.filter(movie => movie.id !== movieIdToRemove));
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {movieDetails.map((movieDetail, index) => (
         <div key={index} style={{ width: '20%', padding: '10px', position: 'relative' }}>
           <div className="movie-card">
+            <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} />
+            <div className="movie-details">
+              <h1 className="movie-title">{movieDetail.title}</h1>
+              <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>More details</p>
+              <p>Suggested by {suggestions[index].sender}</p>
+            </div>
+            {/* Add the Remove button here */}
             <button
-              onClick={() => removeFromWatchlist(movieDetail.id)}
+              // onClick={() => removeFromWatchlist(movieDetail.id)}
               style={{
                 position: 'absolute',
                 top: '10px',
@@ -72,11 +72,6 @@ const WatchList = () => {
             >
               <CloseIcon></CloseIcon>
             </button>
-            <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
-            <div className="movie-details">
-              <h1 className="movie-title">{movieDetail.title}</h1>
-              <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>more details</p>
-            </div>
           </div>
         </div>
       ))}
@@ -84,4 +79,4 @@ const WatchList = () => {
   );
 }
 
-export default WatchList;
+export default Suggestion;

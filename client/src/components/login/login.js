@@ -2,6 +2,9 @@ import React, {useState} from "react";
 import "./login.css";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
+import { ViewIcon,ViewOffIcon } from '@chakra-ui/icons'
 
 const Login = ({setLoginUser}) => {
 
@@ -19,6 +22,8 @@ const Login = ({setLoginUser}) => {
             [name]: value,
           }));
     }
+    const [show, setShow] = React.useState(false)
+    const handleClick = () => setShow(!show)
 
     const login = () => { 
         localStorage.setItem('EmailId', user.email);
@@ -33,14 +38,32 @@ const Login = ({setLoginUser}) => {
     }
 
     return (
+        <div className="container">
         <div className="login">
             <h1>Login</h1>
-            <input type="text" name="email" value={user.email} onChange={handleChange} placeholder="Enter your Email"></input>
-            <input type="password" name="password" value={user.password} onChange={handleChange}  placeholder="Enter your Password" ></input>
-            <button onClick={login}>Login </button>
+            <Input variant='outline' type="text" name="email" value={user.email} onChange={handleChange} placeholder='Email' ></Input>
+
+            <InputGroup size='md'>
+                <Input variant='outline'
+                pr='4.5rem'
+                type={show ? 'text' : 'password'}
+                name="password" 
+                placeholder='Enter password'
+                value={user.password} onChange={handleChange}
+                />
+                <InputRightElement width='4.5rem'>
+                    <Button h='1.75rem' size='sm' onClick={handleClick}>
+                        {show ? <ViewIcon/> : <ViewOffIcon/>}
+                    </Button>
+                    {/* <p h='1.75rem' size='sm' onClick={handleClick}>
+                        {show ? <ViewIcon/> : <ViewOffIcon/>}
+                    </p> */}
+                </InputRightElement>
+            </InputGroup>
+            <Button colorScheme='blue' onClick={login}>Login</Button>
             <div>or</div>
-            <button onClick={() => navigate("/register")}>Register</button>
-            {/* <div className="button" onClick={() => navigate("/register")}>Register</div> */}
+            <Button colorScheme='blue' onClick={() => navigate("/register")}>Register</Button>
+        </div>
         </div>
     )
 }

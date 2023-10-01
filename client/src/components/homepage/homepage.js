@@ -5,6 +5,8 @@ import "./homepage.css";
 import { useNavigate } from "react-router-dom";
 import SearchUser from "./SearchUser";
 import SearchMovie from "./SearchMovie";
+import { Button, ButtonGroup } from '@chakra-ui/react'
+import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
@@ -30,6 +32,10 @@ const Homepage = ({ setLoginUser }) => {
     navigate(`/watchlist/${emailId}`);
   }
 
+  const hadleSuggestion=()=>{
+    const emailId = localStorage.getItem('EmailId');
+    navigate(`suggestion/${emailId}`);
+  }
 
   useEffect(() => {
 
@@ -59,12 +65,13 @@ const Homepage = ({ setLoginUser }) => {
 
   return (
     <div>
-
-
-      <button onClick={handleLogout}>Logout</button>
-      <button onClick={handleWatchList}>WatchList</button>
-      <SearchUser />
-      <SearchMovie/>
+      <div className="search-bars">
+        <SearchUser />
+        <SearchMovie/>
+      <Button colorScheme='blue' onClick={handleLogout}>Logout</Button>
+      <Button colorScheme='blue' onClick={handleWatchList}>WatchList</Button>
+      <Button colorScheme='blue' onClick={hadleSuggestion}>Suggestions</Button>
+      </div>
       <h1 className="trending-title">Trending Movies</h1>
       <div className="carousel-container">
         <div className="carousel">
