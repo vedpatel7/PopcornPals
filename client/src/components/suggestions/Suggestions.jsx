@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { CloseIcon } from '@chakra-ui/icons'
+import { CloseIcon,DeleteIcon } from '@chakra-ui/icons'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
@@ -70,7 +70,7 @@ const Suggestion = (props) => {
                 zIndex: '1',
               }}
             >
-              <CloseIcon></CloseIcon>
+              <DeleteIcon></DeleteIcon>
             </button>
           </div>
         </div>

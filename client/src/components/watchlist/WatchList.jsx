@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { CloseIcon } from '@chakra-ui/icons'
+import { CloseIcon, DeleteIcon } from '@chakra-ui/icons'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
@@ -70,7 +70,7 @@ const WatchList = () => {
                 zIndex: '1',
               }}
             >
-              <CloseIcon></CloseIcon>
+              <DeleteIcon></DeleteIcon>
             </button>
             <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
             <div className="movie-details">
