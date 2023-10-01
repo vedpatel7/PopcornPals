@@ -19,9 +19,11 @@ const Trailer=(props)=>{
     },[])
     return <div>
         {trailer.map((item, index) => (
-        <div key={index}>
+        <div key={index}  style={{ textAlign: 'center'}}>
           <h2>{item.name}</h2>
-          <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + item.key} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + item.key} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+        </div>
         </div>
       ))}
     </div>

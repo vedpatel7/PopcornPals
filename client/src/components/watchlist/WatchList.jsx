@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { CloseIcon } from '@chakra-ui/icons'
+import { DeleteIcon } from '@chakra-ui/icons'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const Base_URL = 'https://api.themoviedb.org/3';
@@ -56,8 +56,8 @@ const WatchList = () => {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {movieDetails.map((movieDetail, index) => (
-        <div key={index} style={{ width: '20%', padding: '10px', position: 'relative' }}>
-          <div className="movie-card">
+        <div key={index} style={{ width: '20%', padding: '10px', position: 'relative', height: '400px' }}>
+          <div className="movie-card" style={{ height: '100%' }}>
             <button
               onClick={() => removeFromWatchlist(movieDetail.id)}
               style={{
@@ -70,12 +70,12 @@ const WatchList = () => {
                 zIndex: '1',
               }}
             >
-              <CloseIcon></CloseIcon>
+              <DeleteIcon></DeleteIcon>
             </button>
-            <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} style={{ width: '100%', height: 'auto', objectFit: 'cover' }} />
-            <div className="movie-details">
-              <h1 className="movie-title">{movieDetail.title}</h1>
-              <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>more details</p>
+            <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} style={{ width: '100%', height: '75%', objectFit: 'cover' }} />
+            <div className="movie-details" style={{ height: '25%' }}>
+              <h1 className="movie-title" style={{ fontSize: '1.2rem', margin: '5px 0' }}>{movieDetail.title}</h1>
+              <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)} style={{ fontSize: '0.9rem', margin: '5px 0' }}>more details</p>
             </div>
           </div>
         </div>

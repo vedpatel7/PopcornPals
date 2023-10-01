@@ -63,14 +63,18 @@ const Homepage = ({ setLoginUser }) => {
 
   }, []);
 
+  const imageUrl = 'https://drive.google.com/uc?export=view&id=1ivYJ-sw7jsJDlwERUV4IE-SaUt-c36OR';
   return (
     <div>
+     <div style={{ display: 'flex',justifyContent: 'center', alignItems: 'center', height: '20vh',  }}>
+    <img src={imageUrl} style={{ width: '200px',height:'auto' }}></img>
+    </div>
       <div className="search-bars">
         <SearchUser />
         <SearchMovie/>
-      <Button colorScheme='blue' onClick={handleLogout}>Logout</Button>
-      <Button colorScheme='blue' onClick={handleWatchList}>WatchList</Button>
-      <Button colorScheme='blue' onClick={hadleSuggestion}>Suggestions</Button>
+      <Button colorScheme= 'pink' onClick={handleLogout}>Logout</Button>
+      <Button colorScheme='pink' onClick={handleWatchList}>WatchList</Button>
+      <Button colorScheme='pink' onClick={hadleSuggestion}>Suggestions</Button>
       </div>
       <h1 className="trending-title">Trending Movies</h1>
       <div className="carousel-container">

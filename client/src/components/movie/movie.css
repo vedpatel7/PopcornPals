@@ -2,14 +2,15 @@
 
 /* Style for the title */
 h1 {
-    font-size: 24px;
-    margin: 20px 0;
+    font-size: 40px;
+    margin-top: 20px;
+    color: white;
   }
   
   /* Style for the description */
   p {
-    font-size: 18px;
-    margin-bottom: 20px;
+    font-size: 17px;
+    margin-bottom: 40px;
   }
   
   /* Style for the release date */
@@ -20,6 +21,7 @@ h1 {
 h2 {
     font-size: 18px;
     margin-top: 20px;
+ 
   }
   
   /* Style for the YouTube video iframe */
@@ -28,7 +30,9 @@ h2 {
     max-width: 560px;
     height: 315px;
     margin-bottom: 20px;
+    /* justify-content: center; */
   }
+
   .watchlater {
     display: flex;
     justify-content: space-between; 

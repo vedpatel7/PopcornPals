@@ -95,19 +95,23 @@ app.post("/register", (req, res) => {
 app.post("/watchlist", (req, res) => {
   const { emailId, movieId } = req.body;
   console.log(emailId);
+
   Movie.findOne({ emailId: emailId })
     .then((movie) => {
       if (movie) {
-        movie.movieIds.push(movieId);
-        movie.save()
-          .then(() => {
-            res.send({ message: "Successfully added" });
-          })
-          .catch((err) => {
-            console.error("Error adding movie:", err);
-            res.status(500).send("Internal Server Error");
-          });
-
+        if (!movie.movieIds.includes(movieId)) {
+          movie.movieIds.push(movieId);
+          movie.save()
+            .then(() => {
+              res.send({ message: "Successfully added" });
+            })
+            .catch((err) => {
+              console.error("Error adding movie:", err);
+              res.status(500).send("Internal Server Error");
+            });
+        } else {
+          res.send({ message: "Movie already in watchlist" });
+        }
       } else {
         const newMovie = new Movie({
           emailId: emailId,
@@ -127,6 +131,7 @@ app.post("/watchlist", (req, res) => {
       console.log(err);
     });
 });
+
 
 app.get('/watchlist/:emailId', (req, res) => {
   const { emailId } = req.params;
@@ -170,10 +175,8 @@ app.delete('/watchlist/:emailId/:movieId', (req, res) => {
 app.get('/searchUsersByName/:name', (req, res) => {
   const { name } = req.params;
   const regex = new RegExp(`^${name}`, 'i');
-  // console.log(`Searching for users by name: ${name}`);
   User.find({ name: { $regex: regex } })
     .then((users) => {
-      // console.log('Found users:', users);
       res.json(users);
     })
     .catch((err) => {

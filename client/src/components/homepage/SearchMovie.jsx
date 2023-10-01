@@ -5,33 +5,30 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 import "./Searchbar.css";
-import { resolveMotionValue } from 'framer-motion';
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 
-function SearchMovie({ onSearch }) {
+function SearchMovie() {
   const navigate = useNavigate();
   const [searchMovies, setSearchMovies] = useState([]);
   const [query, setQuery] = useState('');
 
   const handleInputChange = (e) => {
-    setQuery(e.target.value);
-  };
+    const inputValue = e.target.value;
+    setQuery(inputValue);
 
-  const handleSearchMovie = () => {
-    if (query.trim() === "") {
+    // Perform auto-search when input value is not empty
+    if (inputValue.trim() === "") {
       setSearchMovies([]);
-      return;
+    } else {
+      axios.get(`https://api.themoviedb.org/3/search/movie?query=${inputValue}&api_key=${API_KEY}`)
+        .then(response => {
+          setSearchMovies(response.data.results);
+        })
+        .catch(err => {
+          console.error("Error searching for movie by name:", err);
+        });
     }
-    axios.get(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=84edaeedd68b9e73abbe95b5bb70617a`)
-      .then(response => {
-        // console.log(response.data.results);
-        setSearchMovies(response.data.results);
-        // console.log(searchMovies);
-      })
-      .catch(err => {
-        console.error("Error searching for movie by name:", err);
-      });
   };
 
   return (
@@ -40,7 +37,7 @@ function SearchMovie({ onSearch }) {
         placeholder="Search movie"
         value={query}
         onChange={handleInputChange} name="search movie"></Input>
-      <Button colorScheme='blue' onClick={handleSearchMovie}><SearchIcon></SearchIcon></Button>
+      <Button colorScheme='pink'><SearchIcon></SearchIcon></Button>
       <div className="search-results">
         <ul>
           {searchMovies.map((result, index) => (
@@ -50,11 +47,8 @@ function SearchMovie({ onSearch }) {
           ))}
         </ul>
       </div>
-
-
     </div>
   );
 }
 
 export default SearchMovie;
-
