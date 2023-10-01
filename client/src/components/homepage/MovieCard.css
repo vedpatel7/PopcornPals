@@ -1,7 +1,7 @@
 .movie-card {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ddd;
+    border: 1px solid #44318D;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -22,7 +22,7 @@
   
   .movie-details {
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #D83F87;
     color: white;
   }
   
@@ -33,6 +33,7 @@
   
   .movie-release-date {
     font-size: 0.9rem;
+    color: white;
   }
   
 

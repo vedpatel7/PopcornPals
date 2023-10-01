@@ -41,7 +41,7 @@ function SearchUser({ onSearch }) {
         placeholder="Search user"
         value={query}
         onChange={handleInputChange} name="search user"></Input>
-      <Button colorScheme='blue' onClick={handleSearch}><SearchIcon></SearchIcon></Button>
+      <Button colorScheme='pink' onClick={handleSearch}><SearchIcon></SearchIcon></Button>
       <div className="search-results">
         <ul>
           {searchUsers.map((result, index) => (

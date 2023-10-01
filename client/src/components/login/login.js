@@ -60,9 +60,9 @@ const Login = ({setLoginUser}) => {
                     </p> */}
                 </InputRightElement>
             </InputGroup>
-            <Button colorScheme='blue' onClick={login}>Login</Button>
+            <Button colorScheme='pink' onClick={login}>Login</Button>
             <div>or</div>
-            <Button colorScheme='blue' onClick={() => navigate("/register")}>Register</Button>
+            <Button colorScheme='pink' onClick={() => navigate("/register")}>Register</Button>
         </div>
         </div>
     )

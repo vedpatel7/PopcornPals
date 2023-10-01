@@ -39,7 +39,7 @@ function SearchMovie({ onSearch }) {
         placeholder="Search movie"
         value={query}
         onChange={handleInputChange} name="search movie"></Input>
-      <Button colorScheme='blue' onClick={handleSearchMovie}><SearchIcon></SearchIcon></Button>
+      <Button colorScheme='pink' onClick={handleSearchMovie}><SearchIcon></SearchIcon></Button>
       <div className="search-results">
         <ul>
           {searchMovies.map((result, index) => (

@@ -17,10 +17,10 @@
     top: 100%; /* Position it below the search bar */
     left: 0;
     z-index: 999;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: #201843;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     max-height: 200px;
     overflow-y: auto;
     width: 100%;
+    color: white;
   }

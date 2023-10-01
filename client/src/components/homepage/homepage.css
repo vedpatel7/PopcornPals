@@ -59,39 +59,15 @@ body {
     margin: 0 auto; 
   }
 
-  
-  /* button {
-    margin: 8px;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  } */
-/* 
-  input[type="text"] {
-    width: 300px;
-    padding: 10px;
-    border: 2px solid #007bff;
-    border-radius: 4px;
-    margin-bottom: 10px;
-  }
-   */
   ul {
     list-style: none;
     padding: 0;
   }
   
-/* Opacity Transition */
 li {
     margin: 10px 0;
     opacity: 0.5;
-    transition: opacity 0.3s;
+    transition: opacity 1s;
   }
   
   li:hover {
@@ -100,27 +76,22 @@ li {
     
   p {
     cursor: pointer;
-    color: #878a8d;
+    color: white;
     font-size: 18px;
     font-weight: bold;
     margin: 0;
-    transition: color 0.3s;
   }
 
   li:hover p {
-    color: #007bff; 
+    color: #D83F87; 
   }
-  
-  /* homepage.css */
 
-/* Style for the header buttons */
 .header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-/* Style for the search bars */
 .search-bars {
   display: flex;
   justify-content: stretch; 
@@ -130,9 +101,6 @@ li {
 
 }
 
-/* Style for individual search bars (adjust width as needed) */
-
-/* Style for search buttons */
 
 
 
