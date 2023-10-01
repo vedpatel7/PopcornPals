@@ -49,13 +49,13 @@ const Suggestion = (props) => {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {movieDetails.map((movieDetail, index) => (
-        <div key={index} style={{ width: '20%', padding: '10px', position: 'relative' }}>
-          <div className="movie-card">
-            <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} />
-            <div className="movie-details">
+        <div key={index} style={{ width: '20%', padding: '10px', position: 'relative' , height: '400px'}}>
+          <div className="movie-card" style={{ height: '100%' }}>
+            <img src={`https://image.tmdb.org/t/p/w440_and_h660_face/${movieDetail.poster_path}`} alt={movieDetail.title} style={{ width: '100%', height: '75%', objectFit: 'cover' }}/>
+            <div className="movie-details" onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)} style={{ height: '25%' }}>
               <h1 className="movie-title">{movieDetail.title}</h1>
-              <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>More details</p>
-              <p>Suggested by {suggestions[index].sender}</p>
+              {/* <p onClick={() => navigate(`/searchMoviebyName/${movieDetail.id}`)}>More details</p> */}
+              <p style={{ fontSize: '0.9rem', margin: '5px 0' }}>Suggested by {suggestions[index].sender}</p>
             </div>
             {/* Add the Remove button here */}
             <button

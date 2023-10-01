@@ -5,7 +5,6 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
 import { SearchIcon } from '@chakra-ui/icons'
 import "./Searchbar.css";
-import { resolveMotionValue } from 'framer-motion';
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 
