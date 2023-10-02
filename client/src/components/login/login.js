@@ -30,13 +30,22 @@ const Login = ({ setLoginUser }) => {
         localStorage.setItem('EmailId', user.email);
         axios.post("http://localhost:9002/login", user)
             .then((res) => {
+                // console.log(res);
                 const { message, user } = res.data;
                 if (message === "Login successful") {
                     setLoginUser(res.data.user);
                     navigate("/");
-                } else {
+                } else if(res.data.message === "User not found"){
                     toast({
-                        title: 'Incorrect password',
+                        title: 'User Not Found',
+                        status: 'error',
+                        position: 'top',
+                        duration: 9000,
+                        isClosable: true
+                    });
+                }else if(res.data.message === "Incorrect password"){
+                    toast({
+                        title: 'Incorrect Password',
                         status: 'error',
                         position: 'top',
                         duration: 9000,
@@ -67,9 +76,6 @@ const Login = ({ setLoginUser }) => {
                         <Button h='1.75rem' size='sm' onClick={handleClick}>
                             {show ? <ViewIcon /> : <ViewOffIcon />}
                         </Button>
-                        {/* <p h='1.75rem' size='sm' onClick={handleClick}>
-                        {show ? <ViewIcon/> : <ViewOffIcon/>}
-                    </p> */}
                     </InputRightElement>
                 </InputGroup>
                 <Button colorScheme='pink' onClick={login}>Login</Button>

@@ -93,7 +93,7 @@ app.post("/register", (req, res) => {
   User.findOne({ email: email })
     .then((user) => {
       if (user) {
-        return res.status(409).json({ message: "User already registered." });
+        return res.send({ message: "User already registered." });
       } else {
         // Hash the password before saving it to the database
         bcrypt.hash(password, 10, (err, hashedPassword) => {
