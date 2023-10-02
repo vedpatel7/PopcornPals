@@ -28,7 +28,7 @@ function NavBar({ setLoginUser }) {
             <div style={{marginLeft: '20px'}}>
                 <NavLink to={"/"}>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh', }}>
-                        <img src={imageUrl} style={{ width: '200px', height: 'auto' }}></img>
+                        <img src={imageUrl} style={{ width: '150px', height: 'auto' }}></img>
                     </div>
                 </NavLink>
             </div>

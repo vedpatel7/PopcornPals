@@ -10,6 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
+const bcrypt = require('bcrypt');
 
 mongoose.connect("mongodb://127.0.0.1:27017/userDB"
   , {
@@ -44,53 +45,87 @@ app.post("/login", (req, res) => {
   const { email, password } = req.body;
   User.findOne({ email: email })
     .then((user) => {
-      if (user) {
-        if (password === user.password) {
-          res.send({ message: "Login successful", user: user });
-        } else {
-          res.send({ message: "Incorrect password" });
-        }
-      } else {
-        res.send({ message: "User not found" });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
       }
+      // Compare the provided password with the hashed password in the database
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (err) {
+          console.error("Error comparing passwords:", err);
+          return res.status(500).json({ message: "Internal Server Error" });
+        }
+        if (result) {
+          res.json({ message: "Login successful", user: user });
+        } else {
+          res.status(401).json({ message: "Incorrect password" });
+        }
+      });
     })
     .catch((err) => {
       console.error("Error checking user:", err);
-      res.status(500).send("Internal Server Error");
+      res.status(500).json({ message: "Internal Server Error" });
     });
 });
-
 
 app.post("/register", (req, res) => {
   const { name, email, password } = req.body;
 
+  // Password strength requirements
+  const minLength = 8; // Minimum password length
+  const requiresUpperCase = /[A-Z]/; // Requires at least one uppercase letter
+  const requiresLowerCase = /[a-z]/; // Requires at least one lowercase letter
+  const requiresDigit = /[0-9]/; // Requires at least one digit
+  const requiresSpecialChar = /[!@#$%^&*()_+[\]{};':"\\|,.<>?]/; // Requires at least one special character
+
+  // Check if the password meets the strength requirements
+  if (
+    password.length < minLength ||
+    !requiresUpperCase.test(password) ||
+    !requiresLowerCase.test(password) ||
+    !requiresDigit.test(password) ||
+    !requiresSpecialChar.test(password)
+  ) {
+    return res.status(400).json({
+      message: "Password does not meet the minimum requirements.",
+    });
+  }
+
   User.findOne({ email: email })
     .then((user) => {
-      if (user)
-        res.send({ message: "user already registered" })
+      if (user) {
+        return res.status(409).json({ message: "User already registered." });
+      } else {
+        // Hash the password before saving it to the database
+        bcrypt.hash(password, 10, (err, hashedPassword) => {
+          if (err) {
+            console.error("Error hashing password:", err);
+            return res.status(500).json({ message: "Internal Server Error" });
+          }
 
-      else {
-        const user = new User({
-          name: name,
-          email: email,
-          password: password
-        })
-        user.save()
-          .then(() => {
-            res.send({ message: "Successfully registered" });
-          })
-          .catch((err) => {
-            console.error("Error registering user:", err);
-            res.status(500).send("Internal Server Error");
+          const newUser = new User({
+            name: name,
+            email: email,
+            password: hashedPassword,
           });
-      }
 
+          newUser
+            .save()
+            .then(() => {
+              res.status(201).json({ message: "Successfully registered." });
+            })
+            .catch((err) => {
+              console.error("Error registering user:", err);
+              res.status(500).json({ message: "Internal Server Error" });
+            });
+        });
+      }
     })
     .catch(function (err) {
-      console.log(err)
-    })
+      console.error(err);
+      res.status(500).json({ message: "Internal Server Error" });
+    });
+});
 
-})
 
 app.post("/watchlist", (req, res) => {
   const { emailId, movieId } = req.body;
