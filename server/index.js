@@ -129,7 +129,7 @@ app.post("/register", (req, res) => {
 
 app.post("/watchlist", (req, res) => {
   const { emailId, movieId } = req.body;
-  console.log(emailId);
+  // console.log(emailId);
 
   Movie.findOne({ emailId: emailId })
     .then((movie) => {

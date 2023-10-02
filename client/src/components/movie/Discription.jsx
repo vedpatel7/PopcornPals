@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./movie.css";
 import SharePopup from './SharePopup';
-import { AddIcon, ExternalLinkIcon } from '@chakra-ui/icons'
+import { PlusSquareIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { useToast } from '@chakra-ui/react'
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
@@ -86,7 +86,7 @@ const Discription = (props) => {
                 <h1>{title}</h1>
                 <div style={{ display: 'flex', gap: '40px', marginRight: '40px', marginTop: '20px' }}>
                     <p onClick={watchLater} style={{ cursor: 'pointer', fontSize: '23px' }}>
-                        <AddIcon />
+                        <PlusSquareIcon />
                     </p>
                     <p onClick={openPopup} style={{ cursor: 'pointer', fontSize: '23px' }}>
                         <ExternalLinkIcon />

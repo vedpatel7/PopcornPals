@@ -1,0 +1,8 @@
+TMdb has it's own rating system.
+OMdb uses imdb ratings.
+
+In OMdb, you can only look up movies by a keyword search or by IMdb ID.
+TMdb API offeres more methods to look for information.
+
+OMdb -  1,000 calls per day 
+TMdb -  4 requests per second (or ~340,000 calls per day)
