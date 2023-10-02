@@ -4,9 +4,11 @@ import axios from "axios"
 import {useNavigate} from "react-router-dom"
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Input, InputRightElement, InputGroup } from '@chakra-ui/react'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { useToast } from '@chakra-ui/react'
 
 const Register = () => {
-
+    const toast = useToast()
     const navigate = useNavigate()
 
     const [user, setUser] = useState({
@@ -29,9 +31,32 @@ const Register = () => {
         if( name && email && password && (password === reEnterPassword)){
             axios.post("http://localhost:9002/register", user)
             .then( res => {
-                alert(res.data.message)
-                navigate("/login")
+                if(res.data.message === "Successfully registered." ){
+                    navigate("/login")
+                }
+                else if(res.data.message === "User already registered.")
+                {
+                    toast({
+                        title: 'User Already Registered ',
+                        status: 'error',
+                        position: 'top',
+                        duration: 9000,
+                        isClosable: true
+                    });
+                }
+                else if(res.data.message === "Password does not meet the minimum requirements.")
+                {
+                    toast({
+                        title: 'Password does not meet the minimum requirements',
+                        status: 'warning',
+                        position: 'top',
+                        duration: 9000,
+                        isClosable: true
+                    });
+                }
+               
             })
+            
         } else {
             alert("invlid input")
         }
@@ -58,7 +83,7 @@ const Register = () => {
                 />
                 <InputRightElement width='4.5rem'>
                     <Button h='1.75rem' size='sm' onClick={handleClick}>
-                        {show ? 'Hide' : 'Show'}
+                        {show ? <ViewIcon /> : <ViewOffIcon />}
                     </Button>
                 </InputRightElement>
             </InputGroup>
@@ -72,17 +97,14 @@ const Register = () => {
                  onChange={handleChange}
                 />
                 <InputRightElement width='4.5rem'>
-                    <Button h='1.75rem' size='sm' onClick={handleClick}>
-                        {show ? 'Hide' : 'Show'}
-                    </Button>
                 </InputRightElement>
             </InputGroup>
             {/* <div className="button" onClick={register} >Register</div> */}
-            <Button colorScheme='blue' onClick={register}>Register</Button>
+            <Button colorScheme='pink' onClick={register}>Register</Button>
             
             {/* <div className="button" onClick={() => navigate("/login")}>Login</div> */}
             <div>or</div>
-            <Button colorScheme="blue" onClick={() => navigate("/login")}>Login</Button>
+            <Button colorScheme='pink' onClick={() => navigate("/login")}>Login</Button>
         </div>
         </div>
     )

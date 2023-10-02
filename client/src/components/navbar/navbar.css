@@ -1,0 +1,14 @@
+.headerPrimary {
+  color: #3c3b37;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 72px;
+  padding: 0px 10px;
+  font-size: 14px;
+  letter-spacing: normal;
+  background-color: #d83f863b;
+  border-bottom-left-radius: 20px; /* Adjust the value as needed */
+  border-bottom-right-radius: 20px;
+  }
+  
