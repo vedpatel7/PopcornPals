@@ -21,7 +21,7 @@ const Homepage = ({ setLoginUser }) => {
   const [popularmovies, setPopularMovies] = useState([]);
   const [upcomingmovies, setUpcomingMovies] = useState([]);
   const [playingmovies, setPlayingMovies] = useState([]);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true); 
 
   const navigate = useNavigate();
 
