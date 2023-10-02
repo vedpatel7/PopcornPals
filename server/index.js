@@ -46,7 +46,7 @@ app.post("/login", (req, res) => {
   User.findOne({ email: email })
     .then((user) => {
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        return res.send({ message: "User not found" });
       }
       // Compare the provided password with the hashed password in the database
       bcrypt.compare(password, user.password, (err, result) => {
@@ -57,7 +57,7 @@ app.post("/login", (req, res) => {
         if (result) {
           res.json({ message: "Login successful", user: user });
         } else {
-          res.status(401).json({ message: "Incorrect password" });
+          res.send({ message: "Incorrect password" });
         }
       });
     })
@@ -85,7 +85,7 @@ app.post("/register", (req, res) => {
     !requiresDigit.test(password) ||
     !requiresSpecialChar.test(password)
   ) {
-    return res.status(400).json({
+    return res.send({
       message: "Password does not meet the minimum requirements.",
     });
   }
@@ -111,7 +111,7 @@ app.post("/register", (req, res) => {
           newUser
             .save()
             .then(() => {
-              res.status(201).json({ message: "Successfully registered." });
+              res.send({ message: "Successfully registered." });
             })
             .catch((err) => {
               console.error("Error registering user:", err);
