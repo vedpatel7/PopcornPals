@@ -10,6 +10,7 @@ function NavBar({ setLoginUser }) {
     const handleLogout = () => {
         localStorage.removeItem('EmailId');
         setLoginUser({});
+        navigate("/");
     }
 
     const handleWatchList = () => {
@@ -19,26 +20,22 @@ function NavBar({ setLoginUser }) {
 
     const hadleSuggestion = () => {
         const emailId = localStorage.getItem('EmailId');
-        navigate(`suggestion/${emailId}`);
+        navigate(`/suggestion/${emailId}`);
     }
     const imageUrl = 'https://drive.google.com/uc?export=view&id=1ivYJ-sw7jsJDlwERUV4IE-SaUt-c36OR';
     return (
-        <div className="headerPrimary">
-            <div className="left part">
+        <div className="headerPrimary" style={{paddingTop: '40px', paddingBottom: '40px'}}>
+            <div style={{marginLeft: '20px'}}>
                 <NavLink to={"/"}>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh', }}>
                         <img src={imageUrl} style={{ width: '200px', height: 'auto' }}></img>
                     </div>
                 </NavLink>
             </div>
-            <div className="right part">
-
-                {/* <div className="teachDiv">
-                    <span className="teach" onClick={function () { navigate("/login") }}>Teach on Udemy</span>
-                </div> */}
-                <Button colorScheme='pink' onClick={handleLogout}>Logout</Button>
-                <Button colorScheme='pink' onClick={handleWatchList}>WatchList</Button>
-                <Button colorScheme='pink' onClick={hadleSuggestion}>Suggestions</Button>
+            <div style={{ display: 'flex', gap: '50px', marginTop: '30px', marginRight: '20px' }}>
+                <p onClick={handleWatchList}>WatchList</p>
+                <p onClick={hadleSuggestion}>Suggestions</p>
+                <p onClick={handleLogout}>Logout</p>
             </div>
         </div>
     );
