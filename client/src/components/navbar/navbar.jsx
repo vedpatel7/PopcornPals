@@ -24,7 +24,7 @@ function NavBar({ setLoginUser }) {
     }
     const imageUrl = 'https://drive.google.com/uc?export=view&id=1ivYJ-sw7jsJDlwERUV4IE-SaUt-c36OR';
     return (
-        <div className="headerPrimary" style={{paddingTop: '40px', paddingBottom: '40px'}}>
+        <div className="headerPrimary" style={{paddingTop: '30px', paddingBottom: '30px'}}>
             <div style={{marginLeft: '20px'}}>
                 <NavLink to={"/"}>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '20vh', }}>
@@ -32,7 +32,7 @@ function NavBar({ setLoginUser }) {
                     </div>
                 </NavLink>
             </div>
-            <div style={{ display: 'flex', gap: '50px', marginTop: '30px', marginRight: '20px' }}>
+            <div style={{ display: 'flex', gap: '50px', marginTop: '40px', marginRight: '20px' }}>
                 <p onClick={handleWatchList}>WatchList</p>
                 <p onClick={hadleSuggestion}>Suggestions</p>
                 <p onClick={handleLogout}>Logout</p>
