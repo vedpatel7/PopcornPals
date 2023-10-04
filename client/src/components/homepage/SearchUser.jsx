@@ -30,11 +30,17 @@ function SearchUser({ onSearch }) {
     axios.get(`http://localhost:9002/searchUsersByName/${queryValue}`)
       .then(response => {
         setSearchUsers(response.data);
-        setShowResults(true); // Show results when available
+        setShowResults(true);
       })
       .catch(err => {
         console.error("Error searching for users by name:", err);
       });
+  };
+
+  const handleFriendClick = (index) => {
+    const updatedUsers = [...searchUsers];
+    updatedUsers[index].isFriend = !updatedUsers[index].isFriend;
+    setSearchUsers(updatedUsers);
   };
 
   return (
@@ -49,8 +55,16 @@ function SearchUser({ onSearch }) {
           <ul>
             {searchUsers.map((result, index) => (
               <li key={index}>
-                <p onClick={() => navigate(`/watchlist/${result.email}`)}>
-                  <b>{result.name}</b> . {result.email}
+                <p>
+                  <b>{result.name}</b><b>({result.isFriend ? 'Friend' : 'Not Friend'})</b> . 
+                  {result.isFriend && (
+                    <span>
+                      <b onClick={() => navigate(`/watchlist/${result.email}`)}> See Watchlist  .  </b>
+                    </span>
+                  )}
+                  <b onClick={() => handleFriendClick(index)}>
+                    {result.isFriend ? 'Remove Friend' : 'Add Friend'}
+                  </b>
                 </p>
               </li>
             ))}
