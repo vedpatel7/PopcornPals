@@ -37,9 +37,15 @@ const suggestSchema = new mongoose.Schema({
   MovieId: String
 })
 
+const friendSchema = new mongoose.Schema({
+  user1: String, // email of user 1
+  user2: String, // email of user 2
+});
+
 const Suggestion = mongoose.model("Suggestion", suggestSchema)
 const User = mongoose.model("User", userSchema)
 const Movie = mongoose.model("Movie", movieSchema)
+const Friend = mongoose.model("Friend", friendSchema);
 
 app.post("/login", (req, res) => {
   const { email, password } = req.body;
@@ -265,6 +271,58 @@ app.get('/suggestions/:email', (req, res) => {
     });
 });
 
+app.post("/addFriend", (req, res) => {
+  const { user1, user2 } = req.body;
+  // console.log("Received request to add friend:", user1, user2);
+  // Check if the friendship already exists
+  Friend.findOne({ user1, user2 })
+    .then((friendship) => {
+      if (friendship) {
+        res.send({ message: "Friendship already exists." });
+      } else {
+        // Create a new friendship entry
+        const newFriendship = new Friend({
+          user1,
+          user2,
+        });
+
+        newFriendship
+          .save()
+          .then(() => {
+            res.send({ message: "Friend added successfully." });
+          })
+          .catch((err) => {
+            console.error("Error adding friend:", err);
+            res.status(500).send("Internal Server Error");
+          });
+      }
+    })
+    .catch((err) => {
+      console.error("Error checking friendship:", err);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
+// Route to remove a friend
+app.post("/removeFriend", (req, res) => {
+  const { user1, user2 } = req.body;
+
+  // Find and remove the friendship entry
+  Friend.findOneAndRemove({ user1, user2 })
+    .then((friendship) => {
+      if (friendship) {
+        res.send({ message: "Friend removed successfully." });
+      } else {
+        res.send({ message: "Friendship not found." });
+      }
+    })
+    .catch((err) => {
+      console.error("Error removing friend:", err);
+      res.status(500).send("Internal Server Error");
+    });
+});
+
+// ... (existing code)
 
 app.listen(9002, () => {
   console.log("Started on port 9002")
