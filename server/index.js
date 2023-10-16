@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 const bcrypt = require('bcrypt');
 
-mongoose.connect("mongodb://127.0.0.1:27017/userDB"
+mongoose.connect("mongodb+srv://vedvirpara2004:mongoDBcompass@cluster0.y4bhwxm.mongodb.net/?retryWrites=true&w=majority"
   , {
     useNewUrlParser: true,
     useUnifiedTopology: true
