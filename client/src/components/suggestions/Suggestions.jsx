@@ -13,7 +13,7 @@ const Suggestion = (props) => {
   const [movieIds, setMovieIds] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:9002/suggestions/${props.email}`)
+    axios.get(`https://popcorn-pals-backend.vercel.app/suggestions/${props.email}`)
       .then(response => {
         setSuggestions(response.data);
         // Extract movie IDs from suggestions
