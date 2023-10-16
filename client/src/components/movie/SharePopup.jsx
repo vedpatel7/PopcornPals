@@ -17,7 +17,7 @@ const SharePopup = ({ movieId, onClose }) => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:9002/userList")
+            .get("https://popcorn-pals-backend.vercel.app/userList")
             .then((response) => {
                 setUserList(response.data);
             })
@@ -28,7 +28,7 @@ const SharePopup = ({ movieId, onClose }) => {
 
     useEffect(() => {
         if (suggestion.receiver !== "") {
-            axios.post("http://localhost:9002/addSuggestion", suggestion).then((res) => {
+            axios.post("https://popcorn-pals-backend.vercel.app/addSuggestion", suggestion).then((res) => {
             });
         }
     }, [suggestion]);

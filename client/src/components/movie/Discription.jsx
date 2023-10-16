@@ -47,7 +47,7 @@ const Discription = (props) => {
             emailId: emailId,
             movieId: props.id
         };
-        axios.post("http://localhost:9002/watchlist", movie)
+        axios.post("https://popcorn-pals-backend.vercel.app/watchlist", movie)
         .then(res => {
             if (res.data.message === "Successfully added") {
                 toast({

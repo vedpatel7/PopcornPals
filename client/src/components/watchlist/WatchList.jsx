@@ -13,7 +13,7 @@ const WatchList = () => {
   const [movieDetails, setMovieDetails] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:9002/watchlist/${emailId}`)
+    axios.get(`https://popcorn-pals-backend.vercel.app/watchlist/${emailId}`)
       .then(response => {
         setMovieIds(response.data);
       })
@@ -43,7 +43,7 @@ const WatchList = () => {
   }, [movieIds]);
 
   const removeFromWatchlist = (movieIdToRemove) => {
-    axios.delete(`http://localhost:9002/watchlist/${emailId}/${movieIdToRemove}`)
+    axios.delete(`https://popcorn-pals-backend.vercel.app/watchlist/${emailId}/${movieIdToRemove}`)
       .then(response => {
         // Remove the movie from movieDetails without the one being removed
         setMovieDetails(prevMovieDetails => prevMovieDetails.filter(movie => movie.id !== movieIdToRemove));

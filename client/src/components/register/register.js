@@ -29,7 +29,7 @@ const Register = () => {
     const register = () => {
         const { name, email, password, reEnterPassword } = user
         if( name && email && password && (password === reEnterPassword)){
-            axios.post("http://localhost:9002/register", user)
+            axios.post("https://popcorn-pals-backend.vercel.app/register", user)
             .then( res => {
                 if(res.data.message === "Successfully registered." ){
                     navigate("/login")
