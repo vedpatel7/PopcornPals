@@ -28,7 +28,7 @@ const Login = ({ setLoginUser }) => {
 
     const login = () => {
         localStorage.setItem('EmailId', user.email);
-        axios.post("http://localhost:9002/login", user)
+        axios.post("https://popcorn-pals-backend.vercel.app/login", user)
             .then((res) => {
                 // console.log(res);
                 const { message, user } = res.data;
