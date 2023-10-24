@@ -28,7 +28,7 @@ function SearchUser({ onSearch }) {
       return;
     }
 
-    axios.get(`http://localhost:9002/searchUsersByName/${queryValue}`)
+    axios.get(`https://popcorn-pals-backend.vercel.app/searchUsersByName/${queryValue}`)
       .then(response => {
         setSearchUsers(response.data);
         setShowResults(true);
@@ -41,7 +41,7 @@ function SearchUser({ onSearch }) {
   const handleFriendClick = (index) => {
     const friendEmail = searchUsers[index].email; // Get the email of the user to become friends with
     // Make an HTTP POST request to add a friend
-    axios.post('http://localhost:9002/addFriend', {
+    axios.post('https://popcorn-pals-backend.vercel.app/addFriend', {
       user1: user1, // Assuming you have the current user's email stored somewhere
       user2: friendEmail,
     })

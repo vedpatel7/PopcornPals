@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./movie.css";
 import SharePopup from './SharePopup';
-import { PlusSquareIcon, ExternalLinkIcon } from '@chakra-ui/icons'
-import { useToast } from '@chakra-ui/react'
+import { PlusSquareIcon, ExternalLinkIcon } from '@chakra-ui/icons';
+import { useToast } from '@chakra-ui/react';
 
 const API_KEY = '84edaeedd68b9e73abbe95b5bb70617a';
 const getDiscription = (id) => {
-    return `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+    return `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`;
 }
 
 const Discription = (props) => {
@@ -16,6 +16,7 @@ const Discription = (props) => {
     const [title, setTitle] = useState('');
     const [date, setDate] = useState('');
     const [isPopupOpen, setPopupOpen] = useState(false);
+    const [genres, setGenres] = useState([]);
 
     const toast = useToast();
     const navigate = useNavigate();
@@ -34,9 +35,11 @@ const Discription = (props) => {
                 const dis = response.data.overview;
                 const title = response.data.title;
                 const date = response.data.release_date;
+                const genreNames = response.data.genres.map(genre => genre.name);
                 setDiscription(dis);
                 setTitle(title);
                 setDate(date);
+                setGenres(genreNames);
             })
             .catch(err => { console.log(err) })
     }, [props.id]);
@@ -98,6 +101,7 @@ const Discription = (props) => {
             )}
 
             <p>{discription}</p>
+            <p>Genres: {genres.join(', ')}</p>
         </div>
     )
 }
