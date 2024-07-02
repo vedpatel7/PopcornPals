@@ -1,0 +1,40 @@
+/* discription.css */
+
+/* Style for the title */
+h1 {
+    font-size: 40px;
+    margin-top: 20px;
+    color: white;
+  }
+  
+  /* Style for the description */
+  p {
+    font-size: 17px;
+    margin-bottom: 40px;
+  }
+  
+  /* Style for the release date */
+  h4 {
+    font-size: 16px;
+  }
+  
+h2 {
+    font-size: 18px;
+    margin-top: 20px;
+ 
+  }
+  
+  /* Style for the YouTube video iframe */
+  iframe {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    margin-bottom: 20px;
+    /* justify-content: center; */
+  }
+
+  .watchlater {
+    display: flex;
+    justify-content: space-between; 
+    margin-bottom: 20px;
+  }
